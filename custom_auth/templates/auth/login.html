@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "auth.css" %}">
+{% endblock css %}
+
+{% block content %}
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form method="POST" action="{% url "login" %}">
+    {% csrf_token %}
+    <h3>Login</h3>
+
+    <label for="username"><i class="fa-solid fa-user"></i>Email</label>
+    <input type="email" placeholder="Email" name="email">
+
+    <label for="password"><i class="fa-solid fa-key"></i>Password</label>
+    <input type="password" placeholder="Password" name="password">
+
+    <button type="submit">Log In</button>
+    <a class="not-a-style" href="{% url "register" %}">
+        <div class="social">
+            <div><i class="fa-solid fa-user-plus"></i> New? Register here! </div>
+        </div>
+    </a>
+</form>
+{% endblock content %}

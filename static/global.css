@@ -1,0 +1,14 @@
+ *,
+ *:before,
+ *:after {
+     box-sizing: border-box;
+ }
+
+ body {
+     background-color: #080710 !important;
+ }
+
+ .not-a-style {
+     text-decoration: none;
+     all: unset !important;
+ }
