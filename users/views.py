@@ -1,52 +1,53 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, redirect
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.models import User
 from .forms import LoginForm, SignupForm
 # Create your views here.
 
 
-def login(request):
-    ctx = {
-        "errorMessage": None,
-        "form" : None,
-        "is_login" : True,
-    }
-       
-    if request.method == "POST":
-        loginform = LoginForm(request.POST)
-        if loginform.is_valid():
-            email = loginform.cleaned_data['email']
-            password = loginform.cleaned_data['password']
-            
-        else:
-            ctx['form'] = loginform
-            return render(request, "auth/auth-page.html", ctx)
-    else:
-        ctx['form'] = LoginForm()
+def signin(request):
 
-    return render(request, "auth/auth-page.html", ctx)
+    if request.user.is_authenticated:
+        return redirect("home")
+
+    loginform = LoginForm(request.POST or None)
+
+    if request.method == "POST" and loginform.is_valid():
+        user = loginform.userlogin()
+        if user:
+            login(request, user)
+            return redirect("home")
+
+    return render(request, "auth/auth-page.html", {
+        "form": loginform,
+        "is_login": True,
+    })
 
 
 def register(request):
     ctx = {
-        "errorMessage": None,
-        "form" : None,
-        "is_login" : False
+        "form": None,
+        "is_login": False
     }
 
     signupform = SignupForm()
     ctx["form"] = signupform
 
     if request.method == "POST":
-        username = request.POST.get("username")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        confirm_password = request.POST.get("password_confirm")
-
-        if confirm_password == password:
-            print(f"{username} -> {email}")
+        signupform = SignupForm(request.POST or None)
+        if signupform.is_valid():
+            print(signupform.cleaned_data['username'])
         else:
-            ctx["errorMessage"] = "Password not matched"
+            ctx["form"] = signupform
 
     return render(request, "auth/auth-page.html", ctx)
+
+
+def check_username(request):
+    username = request.POST.get('username')
+    if username == "" or len(username) < 5:
+        return HttpResponse("<span class='mi'>Please type in a valid username<span>")
+    if get_user_model().objects.filter(username__iexact=username).exists():
+        return HttpResponse(f"<span class='in_use'>{username}</span> already exists")
+    return HttpResponse(f"<span class='avail'>{username}</span> is available to use")

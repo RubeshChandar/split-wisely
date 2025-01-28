@@ -136,6 +136,17 @@ i {
     font-weight: bold;
 }
 
+.er_auth ul,
+.er_auth li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.er_auth li::before {
+    content: '⚠️ ';
+}
+
 .er_auth i,
 .er_single i {
     color: yellow;
@@ -154,4 +165,22 @@ i {
     margin: 0;
     color: red;
     list-style-type: none;
+}
+
+#username-avail {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#username-avail .avail {
+    color: #00ff00;
+}
+
+#username-avail .in_use {
+    color: red;
+}
+
+#username-avail .mi {
+    color: yellow;
 }

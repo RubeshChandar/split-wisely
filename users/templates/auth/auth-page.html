@@ -19,22 +19,23 @@
     <h3>Register</h3>
     {% endif %}
 
-    {% if errorMessage or form.non_field_errors %}
+    {% if form.non_field_errors %}
     <div class="er_auth">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        {% if errorMessage %}
-        {{errorMessage}}
-        {% else %}
         {{form.non_field_errors}}
-        {% endif %}
     </div>
     {% endif %}
+
+
 
     {% for field in form  %}
     <label for="{{ field.id_for_label }}">
         {{ field.label|safe }}
     </label>
     {{field}}
+
+    {% if field.id_for_label == "id_username" %}
+    <div id="username-avail"></div>
+    {% endif %}
 
     {% if field.errors %}
     <div class="er_single">
