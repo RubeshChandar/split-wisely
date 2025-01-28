@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Register{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "auth.css" %}">
+{% endblock css %}
+
+{% block content %}
+<div class="background increased">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+<form method="POST" action="{% if is_login %}{% url 'login' %}{% else %}{% url 'register' %}{% endif %}">
+    {% csrf_token %}
+    {% if is_login %}
+    <h3>Log In</h3>
+    {% else %}
+    <h3>Register</h3>
+    {% endif %}
+
+    {% if errorMessage or form.non_field_errors %}
+    <div class="er_auth">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        {% if errorMessage %}
+        {{errorMessage}}
+        {% else %}
+        {{form.non_field_errors}}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% for field in form  %}
+    <label for="{{ field.id_for_label }}">
+        {{ field.label|safe }}
+    </label>
+    {{field}}
+
+    {% if field.errors %}
+    <div class="er_single">
+        <i class="fa-solid fa-triangle-exclamation"></i> {{field.errors}}
+    </div>
+    {% endif %}
+
+    {% endfor %}
+
+    <button type="submit">
+        {% if is_login %}
+        Log In
+        {% else %}
+        Register User
+        {% endif %}
+    </button>
+
+    <a class="not-a-style" href="{% if is_login %}{% url 'register' %}{% else %}{% url 'login' %}{% endif %}">
+        <div class="social">
+            <div>
+                <i class="fa-solid {%if is_login%}fa-user-plus{% else %}fa-user-lock{%endif%}"></i>
+                {%if is_login%}
+                New? Register here!
+                {% else %}
+                Already Registered? Login here!
+                {%endif%}
+            </div>
+        </div>
+    </a>
+</form>
+{% endblock content %}

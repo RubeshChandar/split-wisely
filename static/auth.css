@@ -126,3 +126,32 @@ i {
     background-color: rgba(255, 255, 255, 0.47);
     cursor: pointer;
 }
+
+.er_auth {
+    margin: 20px 0px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: red;
+    font-weight: bold;
+}
+
+.er_auth i,
+.er_single i {
+    color: yellow;
+}
+
+.er_single {
+    display: flex;
+    margin: 15px 0px;
+    border-radius: 20px;
+}
+
+.er_single ul,
+.er_single li {
+    padding: 0;
+    font-weight: bold;
+    margin: 0;
+    color: red;
+    list-style-type: none;
+}
