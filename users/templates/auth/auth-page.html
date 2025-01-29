@@ -25,7 +25,9 @@
     </div>
     {% endif %}
 
-
+    {% if request.GET.next %}
+    <input type="hidden" name="next" value="{{request.GET.next}}">
+    {% endif %}
 
     {% for field in form  %}
     <label for="{{ field.id_for_label }}">
@@ -45,25 +47,24 @@
 
     {% endfor %}
 
-    <button type="submit">
-        {% if is_login %}
-        Log In
-        {% else %}
-        Register User
-        {% endif %}
-    </button>
-
-    <a class="not-a-style" href="{% if is_login %}{% url 'register' %}{% else %}{% url 'login' %}{% endif %}">
+    {% if is_login %}
+    <button type="submit">Log In</button>
+    <a class="not-a-style" href="{% url 'register' %}">
         <div class="social">
             <div>
-                <i class="fa-solid {%if is_login%}fa-user-plus{% else %}fa-user-lock{%endif%}"></i>
-                {%if is_login%}
-                New? Register here!
-                {% else %}
-                Already Registered? Login here!
-                {%endif%}
+                <i class="fa-solid fa-user-plus"></i> New User? Register!
             </div>
         </div>
     </a>
+    {% else %}
+    <button type="submit">Register User</button>
+    <a class="not-a-style" href="{% url 'login' %}">
+        <div class="social">
+            <div>
+                <i class="fa-solid fa-user-plus"></i> Already Registered? Login!
+            </div>
+        </div>
+    </a>
+    {% endif %}
 </form>
 {% endblock content %}

@@ -1,3 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Your Home{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static "split/index.css" %}">
+{% endblock css %}
+
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <h1>Logged in as <span>{{username|title}}</span></h1>
+    <a href="{% url "signout" %}">
+        <button>Signout</button>
+    </a>
+</div>
+{% endblock content %}

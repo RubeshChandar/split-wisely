@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.models import User
 from .forms import LoginForm, SignupForm
 # Create your views here.
 
@@ -13,11 +12,14 @@ def signin(request):
 
     loginform = LoginForm(request.POST or None)
 
+    next_url = request.POST.get('next') or request.GET.get('next') or "home"
+    print(next_url)
+
     if request.method == "POST" and loginform.is_valid():
         user = loginform.userlogin()
         if user:
             login(request, user)
-            return redirect("home")
+            return redirect(next_url)
 
     return render(request, "auth/auth-page.html", {
         "form": loginform,
@@ -51,3 +53,8 @@ def check_username(request):
     if get_user_model().objects.filter(username__iexact=username).exists():
         return HttpResponse(f"<span class='in_use'>{username}</span> already exists")
     return HttpResponse(f"<span class='avail'>{username}</span> is available to use")
+
+
+def signout(request):
+    logout(request)
+    return redirect("login")
