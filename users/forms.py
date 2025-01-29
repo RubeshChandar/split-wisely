@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth import authenticate
-from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.contrib.auth import authenticate, get_user_model
+
+User = get_user_model()
 
 
 class LoginForm(forms.Form):
@@ -33,10 +34,10 @@ class SignupForm(LoginForm):
     username = forms.CharField(
         label="Username",
         min_length=5,
-        validators=[UnicodeUsernameValidator()],
+        validators=[],
         widget=forms.TextInput(attrs={
             'placeholder': 'Type a name more than 5 letters',
-            'hx-post': '/auth/check_username/',
+            'hx-post': '/user/check_username/',
             'hx-trigger': 'keyup',
             'hx-target': '#username-avail'
         }))
@@ -47,3 +48,22 @@ class SignupForm(LoginForm):
         super().__init__(*args, **kwargs)
         self.fields["username"].label = "<i class='fa-solid fa-user'></i>Username"
         self.fields["confirm_password"].label = "<i class='fa-solid fa-lock'></i>Confirm Password"
+
+    def clean(self):
+        username = str(self.cleaned_data.get('username')).replace(' ', '')
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+        confirm_password = self.cleaned_data.get('confirm_password')
+
+        if password != confirm_password:
+            raise forms.ValidationError(
+                f"Password didn't match for {username}")
+
+        if User.objects.filter(email=email).first():
+            raise forms.ValidationError(
+                f"{email} already exists! Try logging instead")
+
+        User.objects.create_user(
+            email=email, username=username, password=password)
+
+        return super().clean()

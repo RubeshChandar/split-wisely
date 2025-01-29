@@ -184,3 +184,11 @@ i {
 #username-avail .mi {
     color: yellow;
 }
+
+.alert-success {
+    --bs-alert-color: white;
+    --bs-alert-bg: green;
+    --bs-alert-border-color: var(--bs-success-border-subtle);
+    --bs-alert-link-color: var(--bs-success-text-emphasis);
+    font-weight: bold;
+}

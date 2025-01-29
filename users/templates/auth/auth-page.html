@@ -36,7 +36,9 @@
     {{field}}
 
     {% if field.id_for_label == "id_username" %}
-    <div id="username-avail"></div>
+    <div id="username-avail">
+        <span style='color:yellow'> ⚠️ Spaces would be removed</span>
+    </div>
     {% endif %}
 
     {% if field.errors %}
@@ -65,6 +67,12 @@
             </div>
         </div>
     </a>
+    {% endif %}
+
+    {% if request.GET.info == "success" %}
+    <div class="alert alert-success mt-3 text-center">
+        Your account has been created! Please log in.
+    </div>
     {% endif %}
 </form>
 {% endblock content %}

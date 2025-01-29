@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from .forms import LoginForm, SignupForm
 # Create your views here.
@@ -13,7 +13,6 @@ def signin(request):
     loginform = LoginForm(request.POST or None)
 
     next_url = request.POST.get('next') or request.GET.get('next') or "home"
-    print(next_url)
 
     if request.method == "POST" and loginform.is_valid():
         user = loginform.userlogin()
@@ -28,26 +27,25 @@ def signin(request):
 
 
 def register(request):
-    ctx = {
-        "form": None,
-        "is_login": False
-    }
 
-    signupform = SignupForm()
-    ctx["form"] = signupform
+    if request.user.is_authenticated:
+        return redirect("home")
 
-    if request.method == "POST":
-        signupform = SignupForm(request.POST or None)
-        if signupform.is_valid():
-            print(signupform.cleaned_data['username'])
-        else:
-            ctx["form"] = signupform
+    signupform = SignupForm(request.POST or None)
 
-    return render(request, "auth/auth-page.html", ctx)
+    if request.method == "POST" and signupform.is_valid():
+        re_url = reverse("login")+"?info=success"
+        return redirect(re_url)
+
+    return render(request, "auth/auth-page.html", {
+        "form": signupform,
+        "is_login": False,
+    })
 
 
 def check_username(request):
-    username = request.POST.get('username')
+    username = request.POST.get('username').replace(' ', '')
+
     if username == "" or len(username) < 5:
         return HttpResponse("<span class='mi'>Please type in a valid username<span>")
     if get_user_model().objects.filter(username__iexact=username).exists():
