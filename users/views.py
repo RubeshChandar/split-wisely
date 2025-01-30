@@ -34,7 +34,8 @@ def register(request):
     signupform = SignupForm(request.POST or None)
 
     if request.method == "POST" and signupform.is_valid():
-        re_url = reverse("login")+"?info=success"
+        user = signupform.signup()
+        re_url = reverse("login")+f"?info=success&user={user.username}"
         return redirect(re_url)
 
     return render(request, "auth/auth-page.html", {
@@ -46,7 +47,7 @@ def register(request):
 def check_username(request):
     username = request.POST.get('username').replace(' ', '')
 
-    if username == "" or len(username) < 5:
+    if username == "" or len(username) < 4:
         return HttpResponse("<span class='mi'>Please type in a valid username<span>")
     if get_user_model().objects.filter(username__iexact=username).exists():
         return HttpResponse(f"<span class='in_use'>{username}</span> already exists")

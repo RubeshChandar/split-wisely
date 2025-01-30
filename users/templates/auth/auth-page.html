@@ -71,7 +71,7 @@
 
     {% if request.GET.info == "success" %}
     <div class="alert alert-success mt-3 text-center">
-        Your account has been created! Please log in.
+        Your account has been created! Please log in using {{request.GET.user}}.
     </div>
     {% endif %}
 </form>
