@@ -1,20 +1,63 @@
-h1 {
-    color: white;
+.fixed-top {
+    background-color: #080710 !important;
+    padding: 20px 50px;
+    max-height: 100px;
+}
+
+.overall {
     margin-top: 100px;
 }
 
-h1>span {
+h1,
+h4 {
+    color: white;
+}
+
+h1 {
+    height: 100%;
+    margin-bottom: 0;
+}
+
+h1>span,
+h4>span {
     color: green;
 }
 
 button {
-    margin-top: 10px;
-    width: 100%;
+    height: 100%;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
+    padding: 10px 20px;
     font-size: 18px;
     font-weight: 600;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
+}
+
+.list-group {
+    padding: 5px 30px;
+}
+
+.list-group-item {
+    min-height: 80px;
+    background-color: #f8f9fa;
+    margin: 3px 0px;
+}
+
+.list-group-item:hover {
+    cursor: pointer;
+    background-color: #e9ecef;
+}
+
+.first {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.first i {
+    margin-right: 20px;
+}
+
+.second>span {
+    padding: 10px 20px;
 }
