@@ -9,5 +9,5 @@ User = get_user_model()
 def home(request):
     user = request.user
     if user in User.objects.all():
-        print("In the records")
+        print(user)
     return render(request, "split/index.html", {"username": user.username, "amount": "£800"})
