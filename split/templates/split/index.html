@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load filter_extra %}
 
 {% block title %}Your Home{% endblock title %}
 {% block css %}
@@ -17,44 +18,44 @@
 </div>
 
 <div class="overall px-5">
-    <h4 class='mt-5'> Overall, you are owed <span>{{amount}}</span> 💷</h4>
+    {% if amount < 0 %}
+    <h4 class='mt-5'> Overall, you owe <span style="color:red;">£{{amount|abs}}</span> 💷</h4>
+    {% else %}
+    <h4 class='mt-5'> Overall, you are owed <span>£{{amount}}</span> 💷</h4>
+    {% endif %}
 </div>
 
 <ul class="list-group">
+    {% for GroupBalance in groupBalances %}
+
     <li class="list-group-item d-flex justify-content-between px-5 py-3">
         <div class="first d-flex align-items-center">
             <i class="fa-solid fa-user"></i>
-            Raveena
+            {{GroupBalance.group.name}}
         </div>
+
+        {% if GroupBalance.balance == 0 %}
+        <div class="second d-flex align-items-end flex-column">
+            <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:blue">
+                SETTLED
+            </div>
+        </div>
+        {% elif GroupBalance.balance < 0 %}
         <div class="second d-flex align-items-end flex-column">
             <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:red">
                 YOU OWE
             </div>
-            <span class="badge rounded-pill text-bg-danger">£300</span>
+            <span class="badge rounded-pill text-bg-danger">£{{GroupBalance.balance|abs}}</span>
         </div>
-    </li>
-    <li class="list-group-item d-flex justify-content-between px-5 py-3">
-        <div class="first d-flex align-items-center">
-            <i class="fa-solid fa-user"></i>
-            Iniyan
-        </div>
+        {% else %}
         <div class="second d-flex align-items-end flex-column">
             <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:green">
                 OWES YOU
             </div>
-            <span class="badge rounded-pill text-bg-success">£2000</span>
+            <span class="badge rounded-pill text-bg-success">£{{GroupBalance.balance}}</span>
         </div>
+        {% endif %}
     </li>
-    <li class="list-group-item d-flex justify-content-between px-5 py-3">
-        <div class="first d-flex align-items-center">
-            <i class="fa-solid fa-user"></i>
-            Teja
-        </div>
-        <div class="second d-flex align-items-end flex-column">
-            <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:blue">
-                NO DUES
-            </div>
-        </div>
-    </li>
+    {% endfor %}
 </ul>
 {% endblock content %}
