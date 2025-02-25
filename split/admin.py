@@ -4,8 +4,7 @@ from .models import *
 
 
 class GroupAdmin(admin.ModelAdmin):
-    readonly_fields = ("created_at", "modified", "created_by", )
-    prepopulated_fields = {"slug": ("name",)}
+    readonly_fields = ("created_at", "modified", "created_by", "slug")
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:  # Only set created_by when creating a new Group

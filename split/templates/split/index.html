@@ -27,35 +27,36 @@
 
 <ul class="list-group">
     {% for GroupBalance in groupBalances %}
+    <a href="{{GroupBalance.group.get_absolute_url}}">
+        <li class="list-group-item d-flex justify-content-between px-5 py-3">
+            <div class="first d-flex align-items-center">
+                <i class="fa-solid fa-users"></i>
+                {{GroupBalance.group.name}}
+            </div>
 
-    <li class="list-group-item d-flex justify-content-between px-5 py-3">
-        <div class="first d-flex align-items-center">
-            <i class="fa-solid fa-user"></i>
-            {{GroupBalance.group.name}}
-        </div>
-
-        {% if GroupBalance.balance == 0 %}
-        <div class="second d-flex align-items-end flex-column">
-            <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:blue">
-                SETTLED
+            {% if GroupBalance.balance == 0 %}
+            <div class="second d-flex align-items-end flex-column">
+                <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:blue">
+                    SETTLED
+                </div>
             </div>
-        </div>
-        {% elif GroupBalance.balance < 0 %}
-        <div class="second d-flex align-items-end flex-column">
-            <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:red">
-                YOU OWE
+            {% elif GroupBalance.balance < 0 %}
+            <div class="second d-flex align-items-end flex-column">
+                <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:red">
+                    YOU OWE
+                </div>
+                <span class="badge rounded-pill text-bg-danger">£{{GroupBalance.balance|abs}}</span>
             </div>
-            <span class="badge rounded-pill text-bg-danger">£{{GroupBalance.balance|abs}}</span>
-        </div>
-        {% else %}
-        <div class="second d-flex align-items-end flex-column">
-            <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:green">
-                OWES YOU
+            {% else %}
+            <div class="second d-flex align-items-end flex-column">
+                <div class="text-center m-auto" style="width: 100%;font-weight:bold;color:green">
+                    OWES YOU
+                </div>
+                <span class="badge rounded-pill text-bg-success">£{{GroupBalance.balance}}</span>
             </div>
-            <span class="badge rounded-pill text-bg-success">£{{GroupBalance.balance}}</span>
-        </div>
-        {% endif %}
-    </li>
+            {% endif %}
+        </li>
+    </a>
     {% endfor %}
 </ul>
 {% endblock content %}

@@ -12,3 +12,7 @@
      text-decoration: none;
      all: unset !important;
  }
+
+ a {
+     all: unset;
+ }

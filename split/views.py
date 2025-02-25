@@ -15,3 +15,9 @@ def home(request):
 
     return render(request, "split/index.html",
                   {"username": user.username, "amount": total, "groupBalances": groupBalances})
+
+
+@login_required
+def singleGroupView(request, slug):
+    group = Group.objects.get(slug=slug)
+    return render(request, "split/single-group.html", {"group": group})
