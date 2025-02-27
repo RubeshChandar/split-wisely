@@ -1,4 +1,146 @@
-h1,
-h4 {
+.group_title {
+    background-color: green;
     color: white;
+    height: 8vh;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.group_title i {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.back,
+.group_settings {
+    height: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0 10px;
+}
+
+
+.back:hover,
+.group_settings:hover {
+    color: red;
+}
+
+.group_title>h1 {
+    font-weight: bold;
+}
+
+.group_title>h1>i {
+    margin-right: 20px;
+}
+
+.group_settings {
+    height: 100%;
+    cursor: pointer;
+    padding: 0px 10px;
+}
+
+.tools {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    top: 8vh;
+    background-color: #080710 !important;
+    position: sticky;
+    padding: 20px 50px;
+}
+
+.tools>p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.tools button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.tools button>i {
+    font-size: 1.4rem !important;
+}
+
+.transactions,
+a {
+    all: unset;
+    cursor: pointer;
+}
+
+.transactions li {
+    background-color: white;
+    min-height: 100px;
+    margin: 15px 20px;
+    border-radius: 20px;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.date {
+    width: 15%;
+}
+
+.desc {
+    width: 80%;
+    font-size: 1.89rem;
+    text-overflow: ellipsis;
+}
+
+.bal {
+    width: 20%;
+    text-align: end;
+}
+
+.add-expense {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+.content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+    border-radius: 30px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

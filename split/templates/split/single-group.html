@@ -3,6 +3,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static "split/single-group.css" %}">
+
 {% endblock css %}
 
 {% block title %}
@@ -10,10 +11,88 @@
 {% endblock title %}
 
 {% block content %}
-<h1>
-    Welcome to {{group.name}}
-    {% for member in group.members.all %}
-    <h4>{{member}}</h4>
-    {% endfor %}
-</h1>
+
+<div class="d-flex group_title justify-content-between align-items-center">
+
+    <a href="{% url "home" %}" class="back d-flex align-items-center">
+        <i class="fa-solid fa-arrow-left"></i> Home Page
+    </a>
+
+    <h1> <i class="fa-solid fa-people-group"></i>{{group.name}}</h1>
+
+    <a href="" class="group_settings d-flex align-items-center">
+        <i class="fa-solid fa-gear"></i>Settings
+    </a>
+</div>
+
+<div class="tools">
+    <p class="fs-1 fw-bold font-monospace">
+        You are owed, <span style="color:red;margin-left:10px">£800</span>
+    </p>
+    <button type="button" class="btn btn-outline-warning fw-bold">
+        <i class="fa-solid fa-coins me-2" style="color:green"></i>Settle Up</button>
+    <button type="button" id="add-expense-btn" class="btn btn-outline-info fw-bold">
+        <i class="fa-solid fa-file-invoice-dollar me-2" style="color:white"></i>New Expense
+    </button>
+    <button type="button" class="btn btn-outline-light fw-bold">
+        <i class="fa-regular fa-eye me-2" style="color:grey"></i>Member's Split
+    </button>
+</div>
+
+<ul class="transactions">
+    <a href="">
+        <li class="transaction fw-bold">
+            <div class="date text-center">
+                Feb <br>2025
+            </div>
+            <div class="desc">
+                MO's noodles
+            </div>
+            <div class="bal text-success">
+                You Lent <br>£100
+            </div>
+        </li>
+    </a>
+
+    <a href="">
+        <li class="transaction fw-bold">
+            <div class="date text-center">
+                Jan <br>2025
+            </div>
+            <div class="desc">
+                Rudy's Neapolitan Pizza
+            </div>
+            <div class="bal text-danger">
+                You Borrowed <br>£100
+            </div>
+        </li>
+    </a>
+</ul>
+
+<div id="add-expense" class="add-expense">
+    <div class="content">
+        <span id="close" class="close">&times;</span>
+        <h1>Add a new expense</h1>
+    </div>
+</div>
+
+<script>
+    var addExpense = document.getElementById("add-expense");
+    var addExpenseBtn = document.getElementById("add-expense-btn");
+    var close = document.getElementById("close");
+
+    addExpenseBtn.onclick = function () {
+        addExpense.style.display = "block";
+    }
+
+    close.onclick = function () {
+        addExpense.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == addExpense) {
+            addExpense.style.display = "none";
+        }
+    }
+</script>
 {% endblock content %}

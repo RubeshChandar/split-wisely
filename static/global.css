@@ -15,4 +15,14 @@
 
  a {
      all: unset;
+     text-decoration: none;
+     /* Remove underline */
+     color: inherit;
+     /* Inherit color from parent */
+     display: inline-block;
+     /* Prevent block-level behavior */
+     padding: 0;
+     /* Remove default padding */
+     margin: 0;
+     /* Remove default margin */
  }
