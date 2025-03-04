@@ -108,9 +108,8 @@ a {
 }
 
 .add-expense {
-    display: none;
     position: fixed;
-    z-index: 1;
+    z-index: -1;
     left: 0;
     top: 0;
     width: 100%;
@@ -126,7 +125,6 @@ a {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    position: relative;
     border-radius: 30px;
 }
 
@@ -143,4 +141,34 @@ a {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.input-group-text,
+.form-control,
+.form-select {
+    padding: 15px;
+    margin: 10px 0px;
+}
+
+.form-control-plaintext {
+    padding: 0;
+    color: green;
+}
+
+label {
+    font-weight: bold;
+    margin: 8px 0px;
+}
+
+.tx {
+    text-align: center;
+    font-size: 41px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.read label {
+    margin: 0px;
+    margin-right: 50px;
+    padding: 0;
 }

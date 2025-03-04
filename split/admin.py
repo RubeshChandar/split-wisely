@@ -22,5 +22,12 @@ class GroupBalanceAdmin(admin.ModelAdmin):
     get_username.short_description = "Username"
 
 
+class ExpenseAdmin(admin.ModelAdmin):
+    list_display = ("paid_by", "amount", "created_by", "group")
+    readonly_fields = ("created_at", "modified")
+
+
 admin.site.register(Group, GroupAdmin)
 admin.site.register(GroupBalance, GroupBalanceAdmin)
+admin.site.register(Split)
+admin.site.register(Expense, ExpenseAdmin)

@@ -47,6 +47,23 @@ class Expense(models.Model):
     modified = models.DateTimeField(auto_now=True)
     paid_by = models.ForeignKey(
         CustomUser, on_delete=models.DO_NOTHING, related_name="paid_expenses")
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE, related_name="group_expenses")
     created_by = models.ForeignKey(
         CustomUser, on_delete=models.DO_NOTHING, related_name="created_expenses")
+
+    def __str__(self):
+        return f"{self.group.name.capitalize()} -> {self.amount}"
+
+
+class Split(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    expense = models.ForeignKey(
+        Expense, on_delete=models.CASCADE, related_name="split")
+
+    class Meta:
+        unique_together = ("user", "expense")
+
+    def __str__(self):
+        return f"{self.user} -> {self.amount}"

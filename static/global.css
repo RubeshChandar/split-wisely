@@ -1,28 +1,39 @@
- *,
- *:before,
- *:after {
-     box-sizing: border-box;
- }
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
 
- body {
-     background-color: #080710 !important;
- }
+body {
+    background-color: #080710 !important;
+}
 
- .not-a-style {
-     text-decoration: none;
-     all: unset !important;
- }
+.not-a-style {
+    text-decoration: none;
+    all: unset !important;
+}
 
- a {
-     all: unset;
-     text-decoration: none;
-     /* Remove underline */
-     color: inherit;
-     /* Inherit color from parent */
-     display: inline-block;
-     /* Prevent block-level behavior */
-     padding: 0;
-     /* Remove default padding */
-     margin: 0;
-     /* Remove default margin */
- }
+a {
+    all: unset;
+    text-decoration: none;
+    /* Remove underline */
+    color: inherit;
+    /* Inherit color from parent */
+    display: inline-block;
+    /* Prevent block-level behavior */
+    padding: 0;
+    /* Remove default padding */
+    margin: 0;
+    /* Remove default margin */
+}
+
+.errorlist {
+    color: red;
+}
+
+.errorlist {
+    list-style: none;
+    text-align: left;
+    margin: 10px 0;
+    padding: 0;
+}

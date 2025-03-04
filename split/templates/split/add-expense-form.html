@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Add Expense
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "split/single-group.css" %}">
+{% endblock css %}
+
+{% block content %}
+{% include "split/include/group-header.html" %}
+
+<div class="content">
+  {% comment %} <span id="close" class="close">&times;</span> {% endcomment %}
+  <h1 class="tx">Add an Expense</h1>
+
+  <form method="POST" action="{% url "add_expense" slug=group.slug %}">
+    {% csrf_token %}
+
+    {% for field in form  %}
+    <label for="{{field.label}}" style="float: left;">{{field.label}}</label>
+    {% if field.label == "Amount" %}
+    <div class="input-group mb-3">
+      <span class="input-group-text fw-bold">£</span>
+      {% render_field field class+="form-control fw-bold" placeholder=field.label %}
+    </div>
+    {% else %}
+    {% render_field field class+="form-control fw-bold" placeholder=field.label %}
+    {% endif %}
+
+    {{field.errors}}
+    {% endfor %}
+
+    <div class="d-flex justify-content-center mt-4">
+      <button class="btn btn-outline-primary p-2 fw-bold" type="submit">Add Expense</button>
+      <a href="{% url "single-group" slug=group.slug %}" class="btn btn-warning p-2 mx-2 fw-bold">Cancel & go back</a>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+
+{% comment %} <script>
+  var close = document.getElementById("close");
+
+  close.onclick = function () {
+    addExpense.style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target == addExpense) {
+      addExpense.style.display = "none";
+    }
+  }
+</script> {% endcomment %}
