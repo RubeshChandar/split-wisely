@@ -1,10 +1,7 @@
 {% comment %} For the split model {% endcomment %}
 <h1 class="tx mt-3">Split</h1>
 
-<a id="split-equally">
-    <p class="fw-bold">Want to split equally ? <span style="color:blue">Click here</span></p>
-</a>
-
+<p class="fw-bold">Want to reset to equal split? <span id="split-equally" style="color:blue">Click here</span></p>
 {% for member in group.members.all %}
 <div class="input-group my-3">
     <div class="input-group-text">
