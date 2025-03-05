@@ -14,12 +14,14 @@ Add Expense
 {% include "split/include/group-header.html" %}
 
 <div class="content">
-  {% comment %} <span id="close" class="close">&times;</span> {% endcomment %}
   <h1 class="tx">Add an Expense</h1>
 
-  <form method="POST" action="{% url "add_expense" slug=group.slug %}">
+  <form id="expense-form" hx-target="#expense-form" hx-swap="outerHTML" hx-indicator="#loading-indicator"
+    hx-post="{% url "add_expense" slug=group.slug %}">
+
     {% csrf_token %}
 
+    {% comment %} For the expense model {% endcomment %}
     {% for field in form  %}
     <label for="{{field.label}}" style="float: left;">{{field.label}}</label>
     {% if field.label == "Amount" %}
@@ -34,24 +36,19 @@ Add Expense
     {{field.errors}}
     {% endfor %}
 
+    {% include "split/include/split-template.html" %}
+
     <div class="d-flex justify-content-center mt-4">
       <button class="btn btn-outline-primary p-2 fw-bold" type="submit">Add Expense</button>
       <a href="{% url "single-group" slug=group.slug %}" class="btn btn-warning p-2 mx-2 fw-bold">Cancel</a>
     </div>
+
+    <div id="loading-indicator" class="htmx-indicator">
+      Loading...
+    </div>
   </form>
+
 </div>
+
+<script src="{% static "split/add-expense.js" %}"></script>
 {% endblock content %}
-
-{% comment %} <script>
-  var close = document.getElementById("close");
-
-  close.onclick = function () {
-    addExpense.style.display = "none";
-  }
-
-  window.onclick = function (event) {
-    if (event.target == addExpense) {
-      addExpense.style.display = "none";
-    }
-  }
-</script> {% endcomment %}

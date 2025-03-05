@@ -28,3 +28,17 @@ class ExpenseForm(forms.ModelForm):
             raise forms.ValidationError("Only positive number is allowed")
 
         return amount
+
+    def save(self, commit=True, group=None, user=None):
+        instance = super().save(commit=False)
+
+        if not all([group, user]):
+            raise ValueError("Group and User is found to be None")
+
+        instance.group = group
+        instance.created_by = user
+
+        if commit:
+            instance.save()
+
+        return instance

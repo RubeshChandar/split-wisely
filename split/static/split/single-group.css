@@ -172,3 +172,15 @@ label {
     margin-right: 50px;
     padding: 0;
 }
+
+.htmx-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 9999;
+}

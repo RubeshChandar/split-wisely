@@ -1,0 +1,16 @@
+{% comment %} For the split model {% endcomment %}
+<h1 class="tx mt-3">Split</h1>
+
+<a id="split-equally">
+    <p class="fw-bold">Want to split equally ? <span style="color:blue">Click here</span></p>
+</a>
+
+{% for member in group.members.all %}
+<div class="input-group my-3">
+    <div class="input-group-text">
+        <input class="form-check-input mt-0" type="checkbox" name="{{member.username}}_checked" checked>
+    </div>
+    <span class="input-group-text fw-bold">{{member.username|title}}</span>
+    <input type="number" class="form-control" name="split_amount">
+</div>
+{% endfor %}

@@ -1,6 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import ExpenseForm
 from .models import *
@@ -26,14 +28,33 @@ def singleGroupView(request, slug):
     return render(request, "split/single-group.html", {"group": group})
 
 
+# @login_required
+# def add_expense(request, slug):
+#     group = get_object_or_404(Group, slug=slug)
+#     expenseForm = ExpenseForm(request.POST or None, group=group)
+
+#     if request.method == "POST":
+#         if expenseForm.is_valid():
+#             expenseForm.save(group=group, user=request.user)
+
+#             # redirect login for htmx
+#             redirect_url = reverse("single-group", kwargs={"slug": group.slug})
+#             response = HttpResponse()
+#             response['HX-Redirect'] = redirect_url
+#             return response
+
+#     return render(request, "split/add-expense-form.html", {"form": expenseForm, "group": group})
+
+
+# Test
 @login_required
 def add_expense(request, slug):
-    group = get_object_or_404(Group, slug=slug)
+    group = Group.objects.prefetch_related("members").get(slug=slug)
     expenseForm = ExpenseForm(request.POST or None, group=group)
 
     if request.method == "POST":
         if expenseForm.is_valid():
-            print("Here")
-            expenseForm.save(commit=False)
+            print(request.POST)
+            pass
 
     return render(request, "split/add-expense-form.html", {"form": expenseForm, "group": group})

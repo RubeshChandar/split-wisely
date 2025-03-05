@@ -23,8 +23,17 @@ class GroupBalanceAdmin(admin.ModelAdmin):
 
 
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ("paid_by", "amount", "created_by", "group")
+    list_display = ("paid_by_name", "amount", "created_by_name", "group")
     readonly_fields = ("created_at", "modified")
+
+    def paid_by_name(self, obj):
+        return str(obj.paid_by.username).capitalize()
+
+    def created_by_name(self, obj):
+        return str(obj.created_by.username).capitalize()
+
+    paid_by_name.short_description = "Paid by"
+    created_by_name.short_description = "Created by"
 
 
 admin.site.register(Group, GroupAdmin)
