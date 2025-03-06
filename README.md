@@ -20,7 +20,7 @@ This project is a clone of the popular expense-splitting application, Splitwise.
     * Customized Django admin interface for managing expenses and users.
 
 ## Project Structure
-
+```
 split-wisely/
 ├── splitwise/           # Django project settings
 │   ├── pycache/
@@ -47,7 +47,7 @@ split-wisely/
 ├── db.sqlite3
 ├── manage.py
 └── requirements.txt
-
+```
 
 ## Technologies Used
 
