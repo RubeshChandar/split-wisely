@@ -1,8 +1,7 @@
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
-from django.urls import reverse
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import ExpenseForm
 from .models import *
@@ -54,7 +53,9 @@ def add_expense(request, slug):
 
     if request.method == "POST":
         if expenseForm.is_valid():
-            print(request.POST)
-            pass
+            if request.POST.get('rubesh_split', False):
+                print("In here")
+            else:
+                print("No value")
 
     return render(request, "split/add-expense-form.html", {"form": expenseForm, "group": group})

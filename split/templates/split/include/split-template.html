@@ -8,6 +8,6 @@
         <input class="form-check-input mt-0" type="checkbox" name="{{member.username}}_checked" checked>
     </div>
     <span class="input-group-text fw-bold">{{member.username|title}}</span>
-    <input type="number" class="form-control" name="split_amount">
+    <input type="number" class="form-control" id="member_split" step=".01" name="{{member.username}}_split">
 </div>
 {% endfor %}

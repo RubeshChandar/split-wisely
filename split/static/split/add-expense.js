@@ -2,7 +2,7 @@
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
     checkboxes.forEach(checkbox => {
-      const amountInput = checkbox.closest('.input-group').querySelector('input[name="split_amount"]');
+      const amountInput = checkbox.closest('.input-group').querySelector('input[id="member_split"]');
 
       function updateAmountInputState() {
         amountInput.disabled = !checkbox.checked;
@@ -22,12 +22,11 @@
 function distributeAmountEqually() {
     const amountInput = document.getElementById('id_amount');
     const checkboxes = document.querySelectorAll('input[class="form-check-input mt-0"]');
-    const amountInputs = document.querySelectorAll('input[name="split_amount"]');
+    const amountInputs = document.querySelectorAll('input[id="member_split"]');
 
     const totalAmount = parseFloat(amountInput.value) || 0;
     const checkedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
     const checkedCount = checkedCheckboxes.length;
-    console.log(checkedCheckboxes);
 
     if (checkedCount > 0) {
         const share = totalAmount / checkedCount;
