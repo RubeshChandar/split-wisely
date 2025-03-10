@@ -20,6 +20,8 @@ This project is a clone of the popular expense-splitting application, Splitwise.
     * Customized Django admin interface for managing expenses and users.
 
 ## Project Structure
+
+## Project Structure
 ```
 split-wisely/
 ├── splitwise/           # Django project settings
@@ -123,11 +125,11 @@ split-wisely/
 
 ## JavaScript Functionality
 
-* Distributes expense amounts equally among selected users.
-* Disables amount input fields when corresponding checkboxes are unchecked.
-* Handles loading indicators during form submissions using HTMX.
+* **`add-expense.js`:**
+    * Distributes expense amounts equally among selected users when "Split Equally" is clicked.
+    * Makes amount input fields read-only when corresponding checkboxes are unchecked.
+    * Handles loading indicators during form submissions using HTMX.
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request.
-
