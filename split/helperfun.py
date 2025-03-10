@@ -5,12 +5,11 @@ def equaliser(splits, amount):
     if amount == sum_of_splits:
         return splits
 
-    # If sum exceeds the amount, return False
-    if sum_of_splits > amount:
-        return False
-
     # Calculate excess amount
     excess_amount = amount - sum_of_splits
+
+    if excess_amount > 1:
+        return False
 
     # Identify non-zero contributors
     non_zero_keys = [key for key, value in splits.items() if value != 0]
@@ -43,3 +42,8 @@ def equaliser(splits, amount):
         splits[key] += base_amount + (adjustment if i == 0 else 0)
 
     return splits
+
+
+# Debug
+splits = {"rubesh": 166.67, "teja": 166.67, "raveena": 166.67}
+print(equaliser(splits, 500))

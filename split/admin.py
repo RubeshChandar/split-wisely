@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django.utils.html import format_html
 # Register your models here.
 
 
@@ -36,7 +37,17 @@ class ExpenseAdmin(admin.ModelAdmin):
     created_by_name.short_description = "Created by"
 
 
+class SplitAdmin(admin.ModelAdmin):
+    list_display = ("get_username", "amount", "get_expense_readable")
+
+    def get_username(self, obj):
+        return str(obj.user.username).capitalize()
+
+    def get_expense_readable(self, obj):
+        return format_html(f"<b>ID : {obj.expense.id}</b> | {obj.expense}")
+
+
 admin.site.register(Group, GroupAdmin)
 admin.site.register(GroupBalance, GroupBalanceAdmin)
-admin.site.register(Split)
+admin.site.register(Split, SplitAdmin)
 admin.site.register(Expense, ExpenseAdmin)
