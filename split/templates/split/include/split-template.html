@@ -1,13 +1,20 @@
 {% comment %} For the split model {% endcomment %}
 <h1 class="tx mt-3">Split</h1>
-
 <p class="fw-bold">Want to reset to equal split? <span id="split-equally" style="color:blue">Click here</span></p>
+
+{% if fail_msg %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> {{fail_msg}}.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
 {% for member in group.members.all %}
 <div class="input-group my-3">
     <div class="input-group-text">
         <input class="form-check-input mt-0" type="checkbox" name="{{member.username}}_checked" checked>
     </div>
     <span class="input-group-text fw-bold">{{member.username|title}}</span>
-    <input type="number" class="form-control" id="member_split" step=".01" name="{{member.username}}_split">
+    <input type="number" class="form-control" id="member_split" step=".01" name="{{member.username}}">
 </div>
 {% endfor %}

@@ -188,3 +188,11 @@ label {
 #split-equally {
     cursor: pointer;
 }
+
+input:read-only,
+input:read-only:focus {
+    background-color: var(--bs-secondary-bg);
+    opacity: 1;
+    outline: none;
+    box-shadow: none;
+}

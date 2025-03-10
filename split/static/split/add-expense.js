@@ -5,9 +5,10 @@
       const amountInput = checkbox.closest('.input-group').querySelector('input[id="member_split"]');
 
       function updateAmountInputState() {
-        amountInput.disabled = !checkbox.checked;
+        amountInput.readOnly = !checkbox.checked;
+        // amountInput.disabled = !checkbox.checked;
         if (!checkbox.checked) {
-          amountInput.value = ""
+          amountInput.value = "0.00"
         }
         distributeAmountEqually()
       }
