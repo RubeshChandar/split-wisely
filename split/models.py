@@ -59,12 +59,11 @@ class Expense(models.Model):
 class Split(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    expense = models.OneToOneField(
+    expense = models.ForeignKey(
         Expense, on_delete=models.CASCADE, related_name="split")
 
-    # Not needed since I changed the expense from ForeignKey to a OneToOneField
-    # class Meta:
-    #     unique_together = ("user", "expense")
+    class Meta:
+        unique_together = ("user", "expense")
 
     def __str__(self):
         return f"{self.user} -> {self.amount}"

@@ -2,16 +2,15 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse
 from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from .forms import ExpenseForm
 from .helperfun import equaliser
 from .models import *
+from .signals import post_expense_save
 
 User = get_user_model()
-# post_expense_save = post_save.signal
 
 
 @login_required
@@ -56,13 +55,12 @@ def add_expense(request, slug):
     group = Group.objects.prefetch_related("members").get(slug=slug)
     failure_message = None
 
-    test = {'amount': 100, 'description': "test", "paid_by": request.user}
-    expenseForm = ExpenseForm(request.POST or None, group=group, initial=test)
+    expenseForm = ExpenseForm(request.POST or None, group=group)
     splits = {member: 0 for member in group.members.all()}
 
     if request.method == "POST":
         if expenseForm.is_valid():
-            expenseForm.save(group=group, user=request.user)
+            expense = expenseForm.save(group=group, user=request.user)
             for split in splits:
                 splits[split] = float(request.POST.get(split.username, 0))
 
@@ -71,7 +69,16 @@ def add_expense(request, slug):
                 expenseForm.cleaned_data['amount']))
 
             if not splits:
-                failure_message = "Your amount and splits don't add up!"
+                failure_message = "The difference between amount and sum of splits is too high please manually adjust this!"
+            else:
+                post_expense_save.send(
+                    sender=Expense, instance=expense, split_created=True, splits=splits)
+                # redirect logic for htmx
+                redirect_url = reverse(
+                    "single-group", kwargs={"slug": group.slug})
+                response = HttpResponse()
+                response['HX-Redirect'] = redirect_url
+                return response
 
     return render(request, "split/add-expense-form.html", {
         "form": expenseForm,
