@@ -46,6 +46,9 @@ class SplitAdmin(admin.ModelAdmin):
     def get_expense_readable(self, obj):
         return format_html(f"<b>ID : {obj.expense.id}</b> | {obj.expense}")
 
+    get_username.short_description = "Username"
+    get_expense_readable.short_description = "Expense"
+
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(GroupBalance, GroupBalanceAdmin)

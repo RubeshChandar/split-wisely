@@ -6,7 +6,7 @@ def equaliser(splits, amount):
         return splits
 
     # Calculate excess amount
-    excess_amount = amount - sum_of_splits
+    excess_amount = abs(amount - sum_of_splits)
 
     if excess_amount > 1:
         return False

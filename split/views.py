@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.http import HttpResponse
 from django.db.models.signals import post_save
@@ -31,25 +31,6 @@ def singleGroupView(request, slug):
     return render(request, "split/single-group.html", {"group": group})
 
 
-# @login_required
-# def add_expense(request, slug):
-#     group = get_object_or_404(Group, slug=slug)
-#     expenseForm = ExpenseForm(request.POST or None, group=group)
-
-#     if request.method == "POST":
-#         if expenseForm.is_valid():
-#             expenseForm.save(group=group, user=request.user)
-
-#             # redirect logic for htmx
-#             redirect_url = reverse("single-group", kwargs={"slug": group.slug})
-#             response = HttpResponse()
-#             response['HX-Redirect'] = redirect_url
-#             return response
-
-#     return render(request, "split/add-expense-form.html", {"form": expenseForm, "group": group})
-
-
-# Test
 @login_required
 def add_expense(request, slug):
     group = Group.objects.prefetch_related("members").get(slug=slug)
@@ -60,7 +41,6 @@ def add_expense(request, slug):
 
     if request.method == "POST":
         if expenseForm.is_valid():
-            expense = expenseForm.save(group=group, user=request.user)
             for split in splits:
                 splits[split] = float(request.POST.get(split.username, 0))
 
@@ -71,14 +51,14 @@ def add_expense(request, slug):
             if not splits:
                 failure_message = "The difference between amount and sum of splits is too high please manually adjust this!"
             else:
+                # Only save when split exists
+                expense = expenseForm.save(group=group, user=request.user)
+
+                # Sending a signal to store the split into db
                 post_expense_save.send(
                     sender=Expense, instance=expense, split_created=True, splits=splits)
-                # redirect logic for htmx
-                redirect_url = reverse(
-                    "single-group", kwargs={"slug": group.slug})
-                response = HttpResponse()
-                response['HX-Redirect'] = redirect_url
-                return response
+
+                return redirect("single-group", slug=slug)
 
     return render(request, "split/add-expense-form.html", {
         "form": expenseForm,

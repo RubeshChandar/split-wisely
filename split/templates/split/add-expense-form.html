@@ -11,14 +11,13 @@ Add Expense
 {% endblock css %}
 
 {% block content %}
+
 {% include "split/include/group-header.html" %}
 
 <div class="content">
   <h1 class="tx">Add an Expense</h1>
 
-  <form id="expense-form" hx-target="#expense-form" hx-swap="outerHTML" hx-indicator="#loading-indicator"
-    hx-post="{% url "add_expense" slug=group.slug %}">
-
+  <form method="POST" action="{% url "add_expense" slug=group.slug %}" onsubmit="showLoadingIndicator()">
     {% csrf_token %}
 
     {% comment %} For the expense model {% endcomment %}
@@ -43,12 +42,18 @@ Add Expense
       <a href="{% url "single-group" slug=group.slug %}" class="btn btn-warning p-2 mx-2 fw-bold">Cancel</a>
     </div>
 
-    <div id="loading-indicator" class="htmx-indicator">
+    <div id="loading-indicator">
       Loading...
     </div>
-  </form>
 
+  </form>
 </div>
 
 <script src="{% static "split/add-expense.js" %}"></script>
+<script>
+  function showLoadingIndicator() {
+    document.getElementById("loading-indicator").style.display = "block"; // Show the loading indicator
+  }
+</script>
+
 {% endblock content %}
