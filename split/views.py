@@ -1,7 +1,4 @@
 from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.http import HttpResponse
-from django.db.models.signals import post_save
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
@@ -20,15 +17,31 @@ def home(request):
     #     user=user).select_related("group")
     groupBalances = user.groupbalances.all().select_related("group")
     total = groupBalances.aggregate(total=Sum('balance'))['total'] or 0
-
+    print(groupBalances)
     return render(request, "split/index.html",
                   {"username": user.username, "amount": total, "groupBalances": groupBalances})
 
 
 @login_required
 def singleGroupView(request, slug):
-    group = Group.objects.get(slug=slug)
-    return render(request, "split/single-group.html", {"group": group})
+    group = Group.objects.prefetch_related("group_expenses").get(slug=slug)
+    expenses = group.group_expenses.all()
+
+    for expense in expenses:
+
+        split = expense.split.get(user=request.user)
+
+        if split.amount == 0:
+            expense.lent_or_borrowed = 0
+            continue
+
+        if expense.paid_by != request.user:
+            expense.lent_or_borrowed = -split.amount
+            continue
+        else:
+            expense.lent_or_borrowed = expense.amount - split.amount
+
+    return render(request, "split/single-group.html", {"group": group, "expenses": expenses})
 
 
 @login_required

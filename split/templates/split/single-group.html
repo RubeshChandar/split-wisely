@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load filter_extra %}
+
 
 {% block css %}
 <link rel="stylesheet" href="{% static "split/single-group.css" %}">
@@ -30,48 +32,37 @@
 </div>
 
 <ul class="transactions">
+    {% for expense in expenses  %}
     <a href="">
         <li class="transaction fw-bold">
             <div class="date text-center">
-                Feb <br>2025
+                {{expense.created_at|cus_date|safe}}
             </div>
             <div class="desc">
-                MO's noodles
+                {{expense.description}}
             </div>
-            <div class="bal text-success">
-                You Lent <br>£100
-            </div>
-        </li>
-    </a>
 
-    <a href="">
-        <li class="transaction fw-bold">
-            <div class="date text-center">
-                Jan <br>2025
-            </div>
-            <div class="desc">
-                Rudy's Neapolitan Pizza
-            </div>
+            {% if expense.lent_or_borrowed < 0 %}
+
             <div class="bal text-danger">
-                You Borrowed <br>£100
+                You Borrowed <br>£{{ expense.lent_or_borrowed|abs}}
             </div>
+
+            {% elif  expense.lent_or_borrowed > 0  %}
+
+            <div class="bal text-success">
+                You Lent <br>£{{ expense.lent_or_borrowed}}
+            </div>
+
+            {% else %}
+            <div class="bal text-primary">
+                No Dues <br> £0
+            </div>
+            {% endif %}
+
         </li>
     </a>
+    {% endfor %}
+
 </ul>
-
-{% comment %}
-<div id="add-expense" class="add-expense">
-
-</div>
-<button type="button" id="add-expense-btn" class="btn btn-outline-info fw-bold" hx-get="{% url 'add_expense' %}"
-    hx-target="#add-expense" hx-swap="innerHTML"></button>
-<script>
-    var addExpense = document.getElementById("add-expense");
-    var addExpenseBtn = document.getElementById("add-expense-btn");
-
-    addExpenseBtn.onclick = function () {
-        addExpense.style.display = "block";
-    }
-</script>
-{% endcomment %}
 {% endblock content %}

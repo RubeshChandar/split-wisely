@@ -24,7 +24,8 @@ class GroupBalanceAdmin(admin.ModelAdmin):
 
 
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ("paid_by_name", "amount", "created_by_name", "group")
+    list_display = ("description", "paid_by_name",
+                    "amount", "created_by_name", "group")
     readonly_fields = ("created_at", "modified")
 
     def paid_by_name(self, obj):
@@ -44,7 +45,7 @@ class SplitAdmin(admin.ModelAdmin):
         return str(obj.user.username).capitalize()
 
     def get_expense_readable(self, obj):
-        return format_html(f"<b>ID : {obj.expense.id}</b> | {obj.expense}")
+        return format_html(f"<b>{obj.expense.id}</b> | <b> £{obj.expense.amount}</b> | {obj.expense.description}")
 
     get_username.short_description = "Username"
     get_expense_readable.short_description = "Expense"
