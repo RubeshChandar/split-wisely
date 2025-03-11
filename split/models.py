@@ -55,6 +55,9 @@ class Expense(models.Model):
     def __str__(self):
         return f"{self.group.name.capitalize()} -> {self.amount}"
 
+    class Meta:
+        ordering = ["-created_at"]
+
 
 class Split(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

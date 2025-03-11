@@ -42,8 +42,3 @@ def equaliser(splits, amount):
         splits[key] += base_amount + (adjustment if i == 0 else 0)
 
     return splits
-
-
-# Debug
-splits = {"rubesh": 166.67, "teja": 166.67, "raveena": 166.67}
-print(equaliser(splits, 500))
