@@ -29,8 +29,10 @@ class GroupBalance(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name="groupbalances")
     balance = models.DecimalField(max_digits=10, decimal_places=2)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE, related_name="groupbalancesg")
     modified = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} -> {self.group} : {self.balance}"
@@ -63,7 +65,7 @@ class Split(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     expense = models.ForeignKey(
-        Expense, on_delete=models.CASCADE, related_name="split")
+        Expense, on_delete=models.CASCADE, related_name="splits")
 
     class Meta:
         unique_together = ("user", "expense")
