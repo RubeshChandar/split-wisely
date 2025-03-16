@@ -13,33 +13,45 @@ User = get_user_model()
 @login_required
 def home(request):
     user = request.user
-    # groupBalances = GroupBalance.objects.filter(
-    #     user=user).select_related("group")
-    groupBalances = user.groupbalances.all().select_related("group")
+    groupBalances = user.groupbalances.all().prefetch_related("group")
     total = groupBalances.aggregate(total=Sum('balance'))['total'] or 0
-    print(groupBalances)
     return render(request, "split/index.html",
                   {"username": user.username, "amount": total, "groupBalances": groupBalances})
 
 
 @login_required
 def singleGroupView(request, slug):
-    group = Group.objects.prefetch_related("group_expenses").get(slug=slug)
+    group = Group.objects\
+        .prefetch_related("group_expenses")\
+        .get(slug=slug)
+
     expenses = group.group_expenses.all()
+
+    user_splits = {
+        split.expense_id: split.amount
+        for split in Split.objects.filter(expense__group=group, user=request.user)
+    }
 
     for expense in expenses:
 
-        split = expense.split.get(user=request.user)
+        split_amount = user_splits.get(expense.id, 0)
 
-        if split.amount == 0:
+        # Check if the user split is 0 but even if it is zero he might have lent money,
+        # but if the user didn;t pay it then he wasn't probably involved with this split so returning 0
+        if split_amount == 0 and expense.paid_by_id != request.user.id:
             expense.lent_or_borrowed = 0
             continue
 
-        if expense.paid_by != request.user:
-            expense.lent_or_borrowed = -split.amount
+        # If the user hasn't paid any money but has a split share then he owes the entire money hence
+        # -ve for the view logic
+        elif expense.paid_by_id != request.user.id:
+            expense.lent_or_borrowed = -split_amount
             continue
+
+        # Here the user defintely gave money so we are calculating how much he lent,
+        # by just subtracting his share from the total expense amount
         else:
-            expense.lent_or_borrowed = expense.amount - split.amount
+            expense.lent_or_borrowed = expense.amount - split_amount
 
     return render(request, "split/single-group.html", {"group": group, "expenses": expenses})
 
@@ -66,7 +78,6 @@ def add_expense(request, slug):
             else:
                 # Only save when split exists
                 expense = expenseForm.save(group=group, user=request.user)
-
                 # Sending a signal to store the split into db
                 post_expense_save.send(
                     sender=Expense, instance=expense, split_created=True, splits=splits)

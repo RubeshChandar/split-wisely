@@ -15,7 +15,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 class GroupBalanceAdmin(admin.ModelAdmin):
     list_display = ("get_username", "user", "group", "balance")
-    readonly_fields = ("modified",)
+    readonly_fields = ("modified", "created_at")
 
     def get_username(self, obj):
         return str(obj.user.username).capitalize()
