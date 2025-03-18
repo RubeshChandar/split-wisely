@@ -27,10 +27,10 @@ class Group(models.Model):
 
 class GroupBalance(models.Model):
     user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, related_name="groupbalances")
+        CustomUser, on_delete=models.CASCADE, related_name="user_group_balance")
     balance = models.DecimalField(max_digits=10, decimal_places=2)
     group = models.ForeignKey(
-        Group, on_delete=models.CASCADE, related_name="groupbalancesg")
+        Group, on_delete=models.CASCADE, related_name="group_balances")
     modified = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
