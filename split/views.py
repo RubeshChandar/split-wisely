@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from .forms import ExpenseForm
 from .helperfun import equaliser
 from .models import *
@@ -13,7 +14,7 @@ User = get_user_model()
 @login_required
 def home(request):
     user = request.user
-    groupBalances = user.groupbalances.all().prefetch_related("group")
+    groupBalances = user.user_group_balance.prefetch_related("group").all()
     total = groupBalances.aggregate(total=Sum('balance'))['total'] or 0
     return render(request, "split/index.html",
                   {"username": user.username, "amount": total, "groupBalances": groupBalances})
@@ -24,6 +25,9 @@ def singleGroupView(request, slug):
     group = Group.objects\
         .prefetch_related("group_expenses")\
         .get(slug=slug)
+    print(group.members.all())
+    if not group.members.filter(id=request.user.id).exists():
+        return redirect("/forbidden")
 
     expenses = group.group_expenses.all()
 
