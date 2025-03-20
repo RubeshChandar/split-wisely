@@ -1,0 +1,46 @@
+name: docker-splitwisely
+
+services:
+  postgres:
+    image: postgres
+    container_name: splitwise-postgres-db
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"  
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+  django-app:
+    build: .
+    image: split-wisely
+    container_name: django-splitwisely
+    command: /app/entrypoint.sh
+    ports:
+      - "${DJANGO_PORT}:${DJANGO_PORT}"
+    volumes:
+      - .:/app
+
+    depends_on:
+      - postgres
+  
+  redis:
+    image: "redis:alpine"
+    container_name: redis-splitwisely-container
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - ./redis_data:/data
+
+  celery:
+    image: split-wisely
+    container_name: celery-splitwisely
+    command: celery -A splitwise worker -E -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+      - redis
+      - django-app

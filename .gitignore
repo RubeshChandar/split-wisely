@@ -3,3 +3,6 @@
 .vscode/
 __pycache__/
 *.sqlite3
+db_data
+initial-datadump.json
+redis_data
