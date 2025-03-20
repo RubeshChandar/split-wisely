@@ -1,0 +1,7 @@
+.env
+venv/
+Dockerfile
+.DS_Store
+db_data
+initial-datadump.json
+redis_data

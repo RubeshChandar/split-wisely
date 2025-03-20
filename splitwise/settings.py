@@ -1,12 +1,17 @@
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv('.env')
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = "django-insecure-7(+70ex*v557e3i!i06)z#5$xvbm&c=m$hx0dgrl)2!fi-q%c="
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = True
+DEBUG = os.getenv("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOST").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -15,6 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_celery_results",
     "debug_toolbar",
     "widget_tweaks",
     "users",
@@ -59,12 +65,24 @@ WSGI_APPLICATION = "splitwise.wsgi.application"
 
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # }
+
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": "postgres",
+        "PORT": os.getenv("POSTGRES_PORT", 5432),
     }
 }
 
+CELERY_BROKER_URL = f"redis://redis:{os.getenv('REDIS_PORT','6379')}/0"
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXTENDED = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -25,7 +25,7 @@ def singleGroupView(request, slug):
     group = Group.objects\
         .prefetch_related("group_expenses")\
         .get(slug=slug)
-    print(group.members.all())
+
     if not group.members.filter(id=request.user.id).exists():
         return redirect("/forbidden")
 
