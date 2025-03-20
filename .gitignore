@@ -1,6 +1,7 @@
 .gitignore
 .venv/
 .vscode/
+.env
 __pycache__/
 *.sqlite3
 db_data
