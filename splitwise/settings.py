@@ -77,6 +77,7 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": "postgres",
+        # "HOST": "127.0.0.1",
         "PORT": os.getenv("POSTGRES_PORT", 5432),
     }
 }
@@ -85,6 +86,13 @@ CELERY_BROKER_URL = f"redis://redis:{os.getenv('REDIS_PORT','6379')}/0"
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_EXTENDED = True
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": f"redis://redis:{os.getenv('REDIS_PORT','6379')}",
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
