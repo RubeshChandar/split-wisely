@@ -5,7 +5,7 @@ from django.utils.html import format_html
 
 
 class GroupAdmin(admin.ModelAdmin):
-    readonly_fields = ("created_at", "modified", "created_by", "slug")
+    readonly_fields = ("created_at", "modified", "created_by", "slug", "id")
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:  # Only set created_by when creating a new Group

@@ -8,4 +8,4 @@ db_data
 initial-datadump.json
 redis_data
 .DS_Store
-
+scripts

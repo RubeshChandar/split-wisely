@@ -17,7 +17,11 @@
 
 <div class="tools">
     <p class="fs-1 fw-bold font-monospace">
-        You are owed, <span style="color:red;margin-left:10px">£800</span>
+        {% if gb.balance < 0 %}
+        You owe, <span style="color:red;margin-left:10px">£{{gb.balance|abs}}</span>
+        {% else %}
+        You are owed, <span style="color:green;margin-left:10px">£{{gb.balance|abs}}</span>
+        {% endif %}
     </p>
     <a type="button" class="btn btn-outline-warning fw-bold">
         <i class="fa-solid fa-coins me-2" style="color:green"></i>Settle Up</a>

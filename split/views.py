@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 from .forms import ExpenseForm
 from .helperfun import equaliser
 from .models import *
@@ -57,14 +56,18 @@ def singleGroupView(request, slug):
         else:
             expense.lent_or_borrowed = expense.amount - split_amount
 
-    return render(request, "split/single-group.html", {"group": group, "expenses": expenses})
+    return render(request, "split/single-group.html", {
+        "group": group,
+        "expenses": expenses,
+        "gb": group.group_balances.get(user=request.user)
+    })
 
 
 @login_required
 def add_expense(request, slug):
     group = Group.objects.prefetch_related("members").get(slug=slug)
     failure_message = None
-
+    # initial = {"amount": 200, "description": "ASDA", "paid_by": 1}
     expenseForm = ExpenseForm(request.POST or None, group=group)
     splits = {member: 0 for member in group.members.all()}
 

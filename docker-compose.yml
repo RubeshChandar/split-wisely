@@ -27,7 +27,7 @@ services:
   
   redis:
     image: "redis:alpine"
-    container_name: redis-splitwisely-container
+    container_name: redis-splitwisely
     restart: unless-stopped
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
@@ -44,3 +44,12 @@ services:
       - postgres
       - redis
       - django-app
+
+  flower:
+    image: split-wisely
+    container_name: flower-splitwisely
+    command: celery -A splitwise flower --basic_auth=${FLOWER_USER_NAME}:${FLOWER_PASSWORD}
+    ports:
+      - "${FLOWER_PORT}:${FLOWER_PORT}"
+    depends_on:
+      - redis

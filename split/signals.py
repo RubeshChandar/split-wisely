@@ -1,8 +1,20 @@
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
-from .models import *
 from django.db import transaction
+from django.template.defaultfilters import slugify
+
+from .models import *
+from .tasks import *
+
 post_expense_save = post_save
+
+
+@receiver(post_save, sender=Group)
+def make_a_slug(sender, instance, created, **kwargs):
+    if created:
+        slug = slugify(f"{instance.name} {instance.pk}")
+        instance.slug = slug
+        instance.save()
 
 
 @receiver(post_expense_save, sender=Expense)
@@ -19,6 +31,8 @@ def create_splits(sender, instance, **kwargs):
             if splits_to_create:
                 with transaction.atomic():
                     Split.objects.bulk_create(splits_to_create)
+
+            update_gb.delay(instance.group_id)
 
 
 @receiver(m2m_changed, sender=Group.members.through)

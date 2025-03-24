@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", default=True)
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOST").split(",")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOST", "*").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_celery_results",
     "debug_toolbar",
+    "django_extensions",
     "widget_tweaks",
     "users",
     "split",
@@ -83,6 +84,7 @@ DATABASES = {
 CELERY_BROKER_URL = f"redis://redis:{os.getenv('REDIS_PORT','6379')}/0"
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_EXTENDED = True
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {
