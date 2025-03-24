@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, m2m_changed
+from django.db.models.signals import post_save, m2m_changed, post_delete
 from django.dispatch import receiver
 from django.db import transaction
 from django.template.defaultfilters import slugify
@@ -33,6 +33,11 @@ def create_splits(sender, instance, **kwargs):
                     Split.objects.bulk_create(splits_to_create)
 
             update_gb.delay(instance.group_id)
+
+
+@receiver(post_delete, sender=Expense)
+def trigger_celery_update_gb(sender, instance, **kwargs):
+    update_gb.delay(instance.group_id)
 
 
 @receiver(m2m_changed, sender=Group.members.through)

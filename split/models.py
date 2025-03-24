@@ -40,6 +40,7 @@ class GroupBalance(models.Model):
     class Meta:
         unique_together = ('user', 'group')
         verbose_name = ("Group Balance")
+        ordering = ["-modified", "-group__modified"]
 
 
 class Expense(models.Model):

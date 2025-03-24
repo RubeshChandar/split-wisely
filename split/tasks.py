@@ -2,8 +2,7 @@ from django.db import connection, reset_queries
 from celery import shared_task
 import logging
 from split.models import *
-from pprint import pprint
-
+from django.utils.timezone import now
 
 logger = logging.getLogger(__name__)
 
@@ -12,9 +11,9 @@ logger = logging.getLogger(__name__)
 def update_gb(group_id):
     reset_queries()
 
-    logger.info(f"Starting to make to {group.name}")
     try:
         group = Group.objects.get(pk=group_id)
+        logger.info(f"Starting to make changes to the {group.name} group")
 
         # Prefetch the splits for all expenses and selected related to optimise
         # query perfomances and django calls those paid_by users with a extra query
@@ -46,6 +45,7 @@ def update_gb(group_id):
 
             if user.id in gb:
                 gb[user.id].balance = net_balance
+                gb[user.id].modified = now()
                 balance_to_update.append(gb[user.id])
 
             else:
@@ -56,13 +56,17 @@ def update_gb(group_id):
                 ))
 
         if balance_to_update:
+
             logger.info(
                 f"There are {len(balance_to_update)} balance to be update")
-            GroupBalance.objects.bulk_update(balance_to_update, ['balance'])
+
+            GroupBalance.objects.bulk_update(
+                balance_to_update, ['balance', 'modified'])
 
         if balance_to_create:
             logger.info(
                 f"There are {len(balance_to_create)} balance to be created")
+
             GroupBalance.objects.bulk_create(balance_to_create)
 
         return f"Changes made to {group.name} with {len(connection.queries)} queries"

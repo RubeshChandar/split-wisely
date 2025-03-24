@@ -13,7 +13,9 @@ User = get_user_model()
 @login_required
 def home(request):
     user = request.user
-    groupBalances = user.user_group_balance.prefetch_related("group").all()
+    groupBalances = user.user_group_balance.select_related("group")
+
+    print([gb.group for gb in groupBalances])
     total = groupBalances.aggregate(total=Sum('balance'))['total'] or 0
     return render(request, "split/index.html",
                   {"username": user.username, "amount": total, "groupBalances": groupBalances})

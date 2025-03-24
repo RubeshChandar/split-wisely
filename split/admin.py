@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import *
 from django.utils.html import format_html
-# Register your models here.
 
 
 class GroupAdmin(admin.ModelAdmin):
+    list_display = ("name", "created_by", "created_at")
     readonly_fields = ("created_at", "modified", "created_by", "slug", "id")
 
     def save_model(self, request, obj, form, change):
@@ -14,8 +14,10 @@ class GroupAdmin(admin.ModelAdmin):
 
 
 class GroupBalanceAdmin(admin.ModelAdmin):
-    list_display = ("get_username", "user", "group", "balance")
+    list_display = ("get_username",
+                    "group", "balance", "modified")
     readonly_fields = ("modified", "created_at")
+    list_filter = ("group", "modified")
 
     def get_username(self, obj):
         return str(obj.user.username).capitalize()
@@ -27,6 +29,8 @@ class ExpenseAdmin(admin.ModelAdmin):
     list_display = ("description", "paid_by_name",
                     "amount", "created_by_name", "group")
     readonly_fields = ("created_at", "modified")
+    list_filter = ("group",)
+    search_fields = ("group__name", "description")
 
     def paid_by_name(self, obj):
         return str(obj.paid_by.username).capitalize()
