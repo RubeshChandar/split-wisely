@@ -1,3 +1,6 @@
+import networkx as nx
+
+
 def equaliser(splits, amount):
     sum_of_splits = sum(splits.values())
 
@@ -42,3 +45,32 @@ def equaliser(splits, amount):
         splits[key] += base_amount + (adjustment if i == 0 else 0)
 
     return splits
+
+
+def cash_flow_finder(balances):
+    G = nx.DiGraph()
+
+    # We need to add users as nodes with demand to 0 to not move any money
+    # and also convert the balance to int as only networkx works only with int
+    for user, balance in balances.items():
+        G.add_node(user, demand=int(balance*100))
+
+    users = list(balances.keys())
+
+    # Our primary objective is to minimize the total amount of money transferred to settle the debts.
+    # We're not trying to optimize for any other cost associated with the transactions themselves.
+    # And that's why the weight is set to 0
+    for i in range(len(users)):
+        for j in range(i+1, len(users)):
+            G.add_edge(users[i], users[j], weight=0)
+            G.add_edge(users[j], users[i], weight=0)
+
+    flow_dict = nx.min_cost_flow(G)
+    transactions = []
+
+    for sender, receivers in flow_dict.items():
+        for receiver, amount in receivers.items():
+            if amount > 0:
+                transactions.append((sender, receiver, amount/100))
+
+    return transactions

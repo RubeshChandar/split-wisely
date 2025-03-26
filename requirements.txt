@@ -22,6 +22,7 @@ humanize==4.12.1
 jsbeautifier==1.15.1
 json5==0.10.0
 kombu==5.5.0
+networkx==3.4.2
 pathspec==0.12.1
 pillow==11.0.0
 prometheus_client==0.21.1

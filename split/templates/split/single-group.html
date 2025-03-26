@@ -30,9 +30,18 @@
         <i class="fa-solid fa-file-invoice-dollar me-2" style="color:white"></i>New Expense
     </a>
 
-    <a type="button" class="btn btn-outline-light fw-bold">
+    <a type="button" class="btn btn-outline-light fw-bold" data-bs-toggle="collapse" href="#collapse_split"
+        hx-get="{% url "members_split" slug=gb.group.slug%}" hx-target="#split-content" hx-swap="innerHTML"
+        hx-indicator="#loading-spinner">
         <i class="fa-regular fa-eye me-2" style="color:grey"></i>Member's Split
     </a>
+</div>
+
+
+<div class="collapse" id="collapse_split">
+    <div class="card card-body mx-4 mb-2" id="split-content">
+        <div id="loading-spinner" class="spinner"></div>
+    </div>
 </div>
 
 <ul class="transactions">

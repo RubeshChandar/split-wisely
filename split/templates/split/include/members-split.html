@@ -1,0 +1,18 @@
+{% load filter_extra %}
+
+{% for transaction in transactions  %}
+<div>
+    <span>
+        {{transaction.0|check_replace_username:request.user.username|safe}}
+    </span>
+
+    need to pay
+
+    <span>
+        {{transaction.1|check_replace_username:request.user.username|safe}}
+    </span>
+
+    a sum of £{{transaction.2}}
+</div>
+
+{% endfor %}

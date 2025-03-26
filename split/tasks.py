@@ -2,6 +2,7 @@ from django.db import connection, reset_queries
 from celery import shared_task
 import logging
 from split.models import *
+from django.core.cache import cache
 from django.utils.timezone import now
 
 logger = logging.getLogger(__name__)
@@ -68,6 +69,11 @@ def update_gb(group_id):
                 f"There are {len(balance_to_create)} balance to be created")
 
             GroupBalance.objects.bulk_create(balance_to_create)
+
+        logger.warning(f"Clearing the cache for group balance in {group.name}")
+        cache_keyword = f"members-split-for-{group.slug}"
+        cache.delete(cache_keyword)
+        logger.info("Cache cleaned")
 
         return f"Changes made to {group.name} with {len(connection.queries)} queries"
 

@@ -3,9 +3,10 @@ from django.contrib.auth import get_user_model
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from .forms import ExpenseForm
-from .helperfun import equaliser
+from .helperfun import equaliser, cash_flow_finder
 from .models import *
 from .signals import post_expense_save
+from django.core.cache import cache
 
 User = get_user_model()
 
@@ -97,3 +98,19 @@ def add_expense(request, slug):
         "group": group,
         "fail_msg": failure_message
     })
+
+
+@login_required
+def members_split(request, slug):
+    cache_keyword = f"members-split-for-{slug}"
+    transactions = cache.get(cache_keyword)
+
+    if not transactions:
+        gb = GroupBalance.objects.prefetch_related(
+            "user").filter(group__slug=slug)
+        balance = {str(g.user.username).capitalize(): float(g.balance)for g in gb}
+        transactions = cash_flow_finder(balance)
+        cache.set(cache_keyword, transactions, timeout=3600)
+        print("calculation made!")
+
+    return render(request, "split/include/members-split.html", {"transactions": transactions})
