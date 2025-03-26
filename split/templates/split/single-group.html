@@ -23,8 +23,10 @@
         You are owed, <span style="color:green;margin-left:10px">£{{gb.balance|abs}}</span>
         {% endif %}
     </p>
-    <a type="button" class="btn btn-outline-warning fw-bold">
-        <i class="fa-solid fa-coins me-2" style="color:green"></i>Settle Up</a>
+
+    <a type="button" class="btn btn-outline-warning fw-bold" href="{% url "settle" slug=group.slug %}">
+        <i class="fa-solid fa-coins me-2" style="color:green"></i>Settle Up
+    </a>
 
     <a type="button" href="{% url "add_expense" slug=group.slug%}" class="btn btn-outline-info fw-bold">
         <i class="fa-solid fa-file-invoice-dollar me-2" style="color:white"></i>New Expense

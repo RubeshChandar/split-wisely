@@ -1,13 +1,14 @@
 <div class="d-flex group_title justify-content-between align-items-center">
 
-    {% if request.resolver_match.view_name == "add_expense" %}
-    <a href="{% url "single-group" slug=group.slug %}" class="back d-flex align-items-center">
-        <i class="fa-solid fa-arrow-left"></i> Back
-    </a>
-    {% else %}
+    {% if request.resolver_match.view_name == "single-group"%}
     <a href="{% url "home" %}" class="back d-flex align-items-center">
         <i class="fa-solid fa-house-chimney"></i> Home Page
     </a>
+    {% else %}
+    <a href="{% url "single-group" slug=group.slug %}" class="back d-flex align-items-center">
+        <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
+
     {% endif %}
 
     <h1> <i class="fa-solid fa-people-group"></i>{{group.name}}</h1>

@@ -114,3 +114,9 @@ def members_split(request, slug):
         print("calculation made!")
 
     return render(request, "split/include/members-split.html", {"transactions": transactions})
+
+
+@login_required
+def settlement(request, slug):
+    group = Group.objects.get(slug=slug)
+    return render(request, "split/settle.html", {"group": group})

@@ -1,4 +1,4 @@
-from django.db import connection, reset_queries
+from django.db import connection, reset_queries, transaction
 from celery import shared_task
 import logging
 from split.models import *
@@ -35,41 +35,48 @@ def update_gb(group_id):
 
         logger.info(f"Populated the balance sheet: {balance_sheet}")
 
-        gb = {g.user_id: g
-              for g in GroupBalance.objects.filter(group=group)}
+        with transaction.atomic():
+            group_balance = GroupBalance.objects.select_for_update()\
+                .filter(group=group)
 
-        balance_to_update = []
-        balance_to_create = []
+            logger.info(f"Group Balance row locked for update")
 
-        for user, balance in balance_sheet.items():
-            net_balance = balance['paid']-balance["share"]
+            gb = {g.user_id: g
+                  for g in group_balance}
 
-            if user.id in gb:
-                gb[user.id].balance = net_balance
-                gb[user.id].modified = now()
-                balance_to_update.append(gb[user.id])
+            balance_to_update = []
+            balance_to_create = []
 
-            else:
-                balance_to_create.append(GroupBalance(
-                    user=user,
-                    balance=net_balance,
-                    group=group
-                ))
+            for user, balance in balance_sheet.items():
+                net_balance = balance['paid']-balance["share"]
 
-        if balance_to_update:
+                if user.id in gb:
+                    gb[user.id].balance = net_balance
+                    gb[user.id].modified = now()
+                    balance_to_update.append(gb[user.id])
 
-            logger.info(
-                f"There are {len(balance_to_update)} balance to be update")
+                else:
+                    balance_to_create.append(GroupBalance(
+                        user=user,
+                        balance=net_balance,
+                        group=group
+                    ))
 
-            GroupBalance.objects.bulk_update(
-                balance_to_update, ['balance', 'modified'])
+            if balance_to_update:
 
-        if balance_to_create:
-            logger.info(
-                f"There are {len(balance_to_create)} balance to be created")
+                logger.info(
+                    f"There are {len(balance_to_update)} balance to be update")
 
-            GroupBalance.objects.bulk_create(balance_to_create)
+                GroupBalance.objects.bulk_update(
+                    balance_to_update, ['balance', 'modified'])
 
+            if balance_to_create:
+                logger.info(
+                    f"There are {len(balance_to_create)} balance to be created")
+
+                GroupBalance.objects.bulk_create(balance_to_create)
+
+        logger.info(f"Group Balance row unlocked after update")
         logger.warning(f"Clearing the cache for group balance in {group.name}")
         cache_keyword = f"members-split-for-{group.slug}"
         cache.delete(cache_keyword)
