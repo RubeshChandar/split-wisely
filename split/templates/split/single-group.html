@@ -31,9 +31,8 @@
     </a>
 
     <a type="button" class="btn btn-outline-light fw-bold" data-bs-toggle="collapse" href="#collapse_split"
-        hx-get="{% url "members_split" slug=gb.group.slug%}" hx-target="#split-content" hx-swap="innerHTML"
-        hx-indicator="#loading-spinner">
-        <i class="fa-regular fa-eye me-2" style="color:grey"></i>Member's Split
+        hx-get="{% url "members_split" slug=gb.group.slug%}" hx-target="#split-content" hx-swap="innerHTML">
+        <i class="fa-regular fa-eye me-2" id="eye" style="color:grey"></i>Member's Split
     </a>
 </div>
 
@@ -78,4 +77,28 @@
     {% endfor %}
 
 </ul>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const collapseSplit = document.getElementById('collapse_split');
+        const eyeIcon = document.getElementById('eye');
+
+        if (!collapseSplit || !eyeIcon) {
+            // Element(s) not found, exit
+            return;
+        }
+
+        collapseSplit.addEventListener('show.bs.collapse', function () {
+            // Collapse is shown
+            eyeIcon.classList.remove('fa-regular', 'fa-eye');
+            eyeIcon.classList.add('fa-solid', 'fa-eye-slash');
+        });
+
+        collapseSplit.addEventListener('hide.bs.collapse', function () {
+            // Collapse is hidden
+            eyeIcon.classList.remove('fa-solid', 'fa-eye-slash');
+            eyeIcon.classList.add('fa-regular', 'fa-eye');
+        });
+    });
+</script>
 {% endblock content %}

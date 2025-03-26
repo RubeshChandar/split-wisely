@@ -209,6 +209,14 @@ input:read-only:focus {
     /* Center the spinner */
 }
 
+
+
+#split-content {
+    margin: 0px auto;
+    /* max-width: fit-content; */
+    background-color: #f7efa7;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
