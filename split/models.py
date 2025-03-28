@@ -73,3 +73,13 @@ class Split(models.Model):
 
     def __str__(self):
         return f"{self.user} -> {self.amount}"
+
+
+class Settlement(models.Model):
+    paid_by = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="settle_pb")
+    paid_to = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="settle_pt")
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    modified = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)

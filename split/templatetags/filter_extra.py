@@ -16,5 +16,5 @@ def custom_date_format(value):
 @register.filter(name='check_replace_username')
 def replace_username_with_you(value: str, user: str):
     if (value.capitalize() == user.capitalize()):
-        return "<b style='color:red;'>YOU</b>"
+        return "<b style='color:red;'>You</b>"
     return f"<b>{value}</b>"

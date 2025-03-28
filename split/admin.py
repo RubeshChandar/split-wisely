@@ -55,7 +55,12 @@ class SplitAdmin(admin.ModelAdmin):
     get_expense_readable.short_description = "Expense"
 
 
+class SettleAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Group, GroupAdmin)
 admin.site.register(GroupBalance, GroupBalanceAdmin)
 admin.site.register(Split, SplitAdmin)
+admin.site.register(Settlement, SettleAdmin)
 admin.site.register(Expense, ExpenseAdmin)

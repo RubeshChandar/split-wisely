@@ -24,8 +24,9 @@
         {% endif %}
     </p>
 
-    <a type="button" class="btn btn-outline-warning fw-bold" href="{% url "settle" slug=group.slug %}">
-        <i class="fa-solid fa-coins me-2" style="color:green"></i>Settle Up
+    <a type="button" class="btn btn-outline-warning fw-bold" hx-get="{% url "settle" slug=group.slug %}"
+        hx-target="#offcanvas-body" hx-swap="innerHTML" data-bs-toggle="offcanvas" href="#offcanvasSettlement">
+        <i class="fa-solid fa-coins me-2" style="color:green"></i>Settle
     </a>
 
     <a type="button" href="{% url "add_expense" slug=group.slug%}" class="btn btn-outline-info fw-bold">
@@ -42,6 +43,21 @@
 <div class="collapse" id="collapse_split">
     <div class="card card-body mx-4 mb-2" id="split-content">
         <div id="loading-spinner" class="spinner"></div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end text-bg-dark" style="width: fit-content;" tabindex="-1" id="offcanvasSettlement">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Make a Settlement</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body" id="offcanvas-body">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Expense
+from .models import Expense, Settlement
 
 
 class ExpenseForm(forms.ModelForm):
@@ -42,3 +42,17 @@ class ExpenseForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class SettlementForm(forms.ModelForm):
+    class Meta:
+        model = Settlement
+        exclude = ['modified', 'created_at']
+
+    def __init__(self, *args, **kwargs):
+        group = kwargs.pop("group", None)
+        user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        self.fields["paid_to"].queryset = group.members.exclude(id=user.id)
+        self.fields["paid_to"].label_from_instance = lambda user: str(
+            user.username).capitalize()

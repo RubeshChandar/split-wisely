@@ -1,4 +1,6 @@
 import networkx as nx
+from django.core.cache import cache
+from split.models import GroupBalance
 
 
 def equaliser(splits, amount):
@@ -72,5 +74,23 @@ def cash_flow_finder(balances):
         for receiver, amount in receivers.items():
             if amount > 0:
                 transactions.append((sender, receiver, amount/100))
+
+    return transactions
+
+
+def get_or_make_calc(slug):
+    cache_keyword = f"members-split-for-{slug}"
+    transactions = cache.get(cache_keyword)
+
+    if not transactions:
+        gb = GroupBalance.objects.prefetch_related("user")\
+            .filter(group__slug=slug)
+        balance = {
+            str(g.user.username).capitalize(): float(g.balance)
+            for g in gb
+        }
+        transactions = cash_flow_finder(balance)
+        cache.set(cache_keyword, transactions, timeout=3600)
+        print("calculation made!")
 
     return transactions

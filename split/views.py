@@ -1,12 +1,15 @@
-from django.shortcuts import redirect, render
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
-from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-from .forms import ExpenseForm
-from .helperfun import equaliser, cash_flow_finder
-from .models import *
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
+from django.views import View
+
+from .forms import ExpenseForm, SettlementForm
+from .helperfun import equaliser, get_or_make_calc
 from .signals import post_expense_save
-from django.core.cache import cache
+from .models import *
 
 User = get_user_model()
 
@@ -102,21 +105,38 @@ def add_expense(request, slug):
 
 @login_required
 def members_split(request, slug):
-    cache_keyword = f"members-split-for-{slug}"
-    transactions = cache.get(cache_keyword)
+    return render(request, "split/include/members-split.html", {
+        "transactions": get_or_make_calc(slug)
+    })
 
-    if not transactions:
-        gb = GroupBalance.objects.prefetch_related(
-            "user").filter(group__slug=slug)
-        balance = {str(g.user.username).capitalize(): float(g.balance)for g in gb}
-        transactions = cash_flow_finder(balance)
-        cache.set(cache_keyword, transactions, timeout=3600)
-        print("calculation made!")
 
-    return render(request, "split/include/members-split.html", {"transactions": transactions})
+class Settlement(LoginRequiredMixin, View):
+
+    def get(self, request, slug):
+        transactions = get_or_make_calc(slug)
+        group = Group.objects.get(slug=slug)
+
+        form = SettlementForm(group=group, user=request.user)
+
+        return render(request, "split/include/settle.html", {
+            "group": group,
+            "form": form,
+            "transactions": transactions
+        })
+
+    def post(self, request, slug):
+        return redirect("single-group", slug=slug)
 
 
 @login_required
-def settlement(request, slug):
-    group = Group.objects.get(slug=slug)
-    return render(request, "split/settle.html", {"group": group})
+def check_settle_amount(request, slug):
+    pay_to_id = request.GET.get("paid_to")
+
+    if pay_to_id == "":
+        return render(request, "split/include/max-settle-partial.html", {"exists": False})
+
+    user = get_object_or_404(User.objects.only("username"), pk=pay_to_id)
+    user = user.username.capitalize()
+
+    amount = 100
+    return render(request, "split/include/max-settle-partial.html", {"exists": True, "pt": user, "amt": amount})
