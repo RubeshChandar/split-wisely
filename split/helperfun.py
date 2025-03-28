@@ -89,8 +89,10 @@ def get_or_make_calc(slug):
             str(g.user.username).capitalize(): float(g.balance)
             for g in gb
         }
-        transactions = cash_flow_finder(balance)
-        cache.set(cache_keyword, transactions, timeout=3600)
+        # transactions = cash_flow_finder(balance)
+        transactions = {(payer, receiver): amount for payer,
+                        receiver, amount in cash_flow_finder(balance)}
+        cache.set(cache_keyword, transactions, timeout=1)
         print("calculation made!")
 
     return transactions

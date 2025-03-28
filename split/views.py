@@ -105,7 +105,7 @@ def add_expense(request, slug):
 
 @login_required
 def members_split(request, slug):
-    return render(request, "split/include/members-split.html", {
+    return render(request, "split/partials/members-split.html", {
         "transactions": get_or_make_calc(slug)
     })
 
@@ -131,12 +131,14 @@ class Settlement(LoginRequiredMixin, View):
 @login_required
 def check_settle_amount(request, slug):
     pay_to_id = request.GET.get("paid_to")
+    transactions = get_or_make_calc(slug)
 
     if pay_to_id == "":
-        return render(request, "split/include/max-settle-partial.html", {"exists": False})
+        return render(request, "split/partials/max-settle.html", {"exists": False})
 
     user = get_object_or_404(User.objects.only("username"), pk=pay_to_id)
     user = user.username.capitalize()
 
-    amount = 100
-    return render(request, "split/include/max-settle-partial.html", {"exists": True, "pt": user, "amt": amount})
+    amount = transactions.get(
+        (str(request.user.username).capitalize(), user), 0)
+    return render(request, "split/partials/max-settle.html", {"exists": True, "pt": user, "amt": amount})

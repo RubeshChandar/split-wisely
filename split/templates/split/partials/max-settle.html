@@ -1,0 +1,22 @@
+{% if exists %}
+<div class="alert mt-3 alert-success fw-bold">
+    {% if amt > 0 %}
+    You can pay a maximum of £{{amt}} to {{pt}}
+    {% else %}
+    All dues settled with {{pt}}
+    {% endif %}
+    <script>
+        document.getElementById("id_amount").max = "{{ amt }}";
+        document.getElementById("id_amount").value = "{{ amt }}";
+    </script>
+</div>
+
+{% else %}
+<div class="alert mt-3 alert-danger fw-bold">
+    Please select a valid user form the list !!
+    <script>
+        document.getElementById("id_amount").max = "0";
+        document.getElementById("id_amount").value = "0";
+    </script>
+</div>
+{% endif %}

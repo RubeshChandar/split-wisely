@@ -1,0 +1,19 @@
+{% load filter_extra %}
+
+<div class="d-flex flex-row flex-wrap justify-content-around">
+    {% if not transactions %}
+    <span style="font-size:1.3rem; font-weight:bold">
+        All dues are settled !!!
+    </span>
+    {% endif %}
+
+    {% for pair,amount in transactions.items  %}
+
+    <span style="margin:4px 5px;font-size:1.3rem">
+        {{pair.0|check_replace_username_1:request.user.username|safe}}
+        {{pair.1|check_replace_username_2:request.user.username|safe}}
+        <b style="color:green"> £{{amount}}</b>
+    </span>
+
+    {% endfor %}
+</div>
