@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.views import View
+from django.contrib import messages
 
 from .forms import ExpenseForm, SettlementForm
 from .helperfun import equaliser, get_or_make_calc
@@ -113,19 +114,43 @@ def members_split(request, slug):
 class Settlement(LoginRequiredMixin, View):
 
     def get(self, request, slug):
-        transactions = get_or_make_calc(slug)
         group = Group.objects.get(slug=slug)
 
-        form = SettlementForm(group=group, user=request.user)
+        settlementForm = SettlementForm(group=group, user=request.user)
 
         return render(request, "split/include/settle.html", {
             "group": group,
-            "form": form,
-            "transactions": transactions
+            "form": settlementForm,
         })
 
     def post(self, request, slug):
-        return redirect("single-group", slug=slug)
+        group = Group.objects.get(slug=slug)
+        transactions = get_or_make_calc(slug)
+        user = request.user
+
+        settlementForm = SettlementForm(request.POST or None,
+                                        group=group, user=user)
+
+        if settlementForm.is_valid():
+            paid_to = str(settlementForm.cleaned_data.get("paid_to").username)
+            acquired_amt = settlementForm.cleaned_data.get("amount")
+            owed_amount = transactions.get(
+                (str(user.username).capitalize(),
+                 paid_to.capitalize()), 0)
+
+            if acquired_amt > owed_amount:
+                messages.add_message(
+                    request, messages.WARNING, "The entered amount is greater than owed amount")
+
+            else:
+                settlementForm.save(group=group, user=request.user)
+                messages.add_message(request, messages.SUCCESS,
+                                     "Added the settlement")
+
+        return render(request, "split/include/settle.html", {
+            "group": group,
+            "form": settlementForm,
+        })
 
 
 @login_required

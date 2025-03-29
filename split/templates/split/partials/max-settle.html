@@ -3,7 +3,7 @@
     {% if amt > 0 %}
     You can pay a maximum of £{{amt}} to {{pt}}
     {% else %}
-    All dues settled with {{pt}}
+    All dues are settled with {{pt}}
     {% endif %}
     <script>
         document.getElementById("id_amount").max = "{{ amt }}";

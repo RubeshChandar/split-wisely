@@ -47,7 +47,7 @@ class ExpenseForm(forms.ModelForm):
 class SettlementForm(forms.ModelForm):
     class Meta:
         model = Settlement
-        exclude = ['modified', 'created_at']
+        exclude = ['modified', 'created_at', 'group', 'paid_by']
 
     def __init__(self, *args, **kwargs):
         group = kwargs.pop("group", None)
@@ -56,3 +56,27 @@ class SettlementForm(forms.ModelForm):
         self.fields["paid_to"].queryset = group.members.exclude(id=user.id)
         self.fields["paid_to"].label_from_instance = lambda user: str(
             user.username).capitalize()
+
+        self.instance.paid_by = user
+        self.instance.group = group
+
+    def clean_amount(self):
+        amount = self.cleaned_data.get("amount")
+        if amount <= 0:
+            raise forms.ValidationError("Only positive number is allowed")
+
+        return amount
+
+    def save(self, commit=True, group=None, user=None):
+        instance = super().save(commit=False)
+
+        if not all([group, user]):
+            raise ValueError("Group and User is found to be None")
+
+        instance.group = group
+        instance.user = user
+
+        if commit:
+            instance.save()
+
+        return instance

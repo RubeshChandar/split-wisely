@@ -4,13 +4,19 @@ from users.models import CustomUser
 from django.template.defaultfilters import slugify
 
 
-class Group(models.Model):
+class TimeStampModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Group(TimeStampModel):
     name = models.CharField(max_length=50)
     members = models.ManyToManyField(CustomUser, related_name="enrolledgroups")
     created_by = models.ForeignKey(
         CustomUser, on_delete=models.SET_NULL, null=True, related_name="created_groups")
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
     slug = models.SlugField(default="", unique=True, db_index=True, null=False)
 
     def __str__(self):
@@ -25,14 +31,12 @@ class Group(models.Model):
         return super().save(*args, **kwargs)
 
 
-class GroupBalance(models.Model):
+class GroupBalance(TimeStampModel):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name="user_group_balance")
     balance = models.DecimalField(max_digits=10, decimal_places=2)
     group = models.ForeignKey(
         Group, on_delete=models.CASCADE, related_name="group_balances")
-    modified = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} -> {self.group} : {self.balance}"
@@ -40,14 +44,13 @@ class GroupBalance(models.Model):
     class Meta:
         unique_together = ('user', 'group')
         verbose_name = ("Group Balance")
+        verbose_name_plural = ("Group Balance")
         ordering = ["-modified", "-group__modified"]
 
 
-class Expense(models.Model):
+class Expense(TimeStampModel):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
     paid_by = models.ForeignKey(
         CustomUser, on_delete=models.DO_NOTHING, related_name="paid_expenses")
     group = models.ForeignKey(
@@ -62,7 +65,7 @@ class Expense(models.Model):
         ordering = ["-created_at"]
 
 
-class Split(models.Model):
+class Split(TimeStampModel):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     expense = models.ForeignKey(
@@ -75,11 +78,14 @@ class Split(models.Model):
         return f"{self.user} -> {self.amount}"
 
 
-class Settlement(models.Model):
+class Settlement(TimeStampModel):
     paid_by = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name="settle_pb")
     paid_to = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, related_name="settle_pt")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    modified = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE, related_name="group_settlements")
+
+    def __str__(self):
+        return f"{self.paid_by} settled {self.amount} to {self.paid_to}"

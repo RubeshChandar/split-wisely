@@ -92,7 +92,7 @@ def get_or_make_calc(slug):
         # transactions = cash_flow_finder(balance)
         transactions = {(payer, receiver): amount for payer,
                         receiver, amount in cash_flow_finder(balance)}
-        cache.set(cache_keyword, transactions, timeout=1)
+        cache.set(cache_keyword, transactions, timeout=600)
         print("calculation made!")
 
     return transactions

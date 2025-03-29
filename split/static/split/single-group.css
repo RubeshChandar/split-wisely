@@ -194,6 +194,11 @@ input:read-only:focus {
     /* Center the spinner */
 }
 
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 20px 10px;
+}
 
 
 #split-content {
