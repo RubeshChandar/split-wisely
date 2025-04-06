@@ -115,7 +115,6 @@ class Settlement(LoginRequiredMixin, View):
 
     def get(self, request, slug):
         group = Group.objects.get(slug=slug)
-
         settlementForm = SettlementForm(group=group, user=request.user)
 
         return render(request, "split/include/settle.html", {
@@ -132,11 +131,9 @@ class Settlement(LoginRequiredMixin, View):
                                         group=group, user=user)
 
         if settlementForm.is_valid():
-            paid_to = str(settlementForm.cleaned_data.get("paid_to").username)
+            paid_to = str(settlementForm.cleaned_data.get("paid_to"))
             acquired_amt = settlementForm.cleaned_data.get("amount")
-            owed_amount = transactions.get(
-                (str(user.username).capitalize(),
-                 paid_to.capitalize()), 0)
+            owed_amount = transactions.get((str(user), str(paid_to)), 0)
 
             if acquired_amt > owed_amount:
                 messages.add_message(
@@ -145,7 +142,11 @@ class Settlement(LoginRequiredMixin, View):
             else:
                 settlementForm.save(group=group, user=request.user)
                 messages.add_message(request, messages.SUCCESS,
-                                     "Added the settlement")
+                                     f"Successfully added a settlement of {acquired_amt} to {paid_to} !!!")
+                response = HttpResponse("", content_type="text/html")
+                # Triggers JS event
+                response["HX-Trigger"] = "settlementSuccess"
+                return response
 
         return render(request, "split/include/settle.html", {
             "group": group,

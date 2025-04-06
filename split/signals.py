@@ -58,3 +58,9 @@ def create_balance_for_new_group(sender, instance, action, **kwargs):
         if gbs_to_create:
             with transaction.atomic():
                 GroupBalance.objects.bulk_create(gbs_to_create)
+
+
+@receiver([post_save, post_delete], sender=Settlement)
+def trigger_celery_on_settlement_model(sender, instance, **kwargs):
+    update_gb.delay(instance.group_id)
+    print(f"Settlement Triggered on {instance.group_id}")

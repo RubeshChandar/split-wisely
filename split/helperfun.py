@@ -85,14 +85,19 @@ def get_or_make_calc(slug):
     if not transactions:
         gb = GroupBalance.objects.prefetch_related("user")\
             .filter(group__slug=slug)
+
         balance = {
             str(g.user.username).capitalize(): float(g.balance)
             for g in gb
         }
+
+        print(balance)
+        print(cash_flow_finder(balance))
+
         # transactions = cash_flow_finder(balance)
-        transactions = {(payer, receiver): amount for payer,
-                        receiver, amount in cash_flow_finder(balance)}
-        cache.set(cache_keyword, transactions, timeout=600)
+        transactions = {(payer, receiver): amount
+                        for payer, receiver, amount in cash_flow_finder(balance)}
+        cache.set(cache_keyword, transactions, timeout=0)
         print("calculation made!")
 
     return transactions

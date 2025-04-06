@@ -1,9 +1,11 @@
-from django.db import connection, reset_queries, transaction
-from celery import shared_task
-import logging
-from split.models import *
-from django.core.cache import cache
 from django.utils.timezone import now
+from django.core.cache import cache
+from split.models import *
+import traceback
+import logging
+from celery import shared_task
+from django.db import connection, reset_queries, transaction
+`from django.db.models import Sum
 
 logger = logging.getLogger(__name__)
 
@@ -22,8 +24,20 @@ def update_gb(group_id):
             .select_related("group", "paid_by")\
             .prefetch_related("splits__user")
 
+        # Settlement logic here
+        settlements = Settlement.objects.filter(group_id=group_id)\
+            .values("paid_by", "paid_to").annotate(total_paid=Sum("amount"))
+
+        # For easier access of the data.
+        settlement_dict = {}
+        for settlement in settlements:
+            settlement_dict[settlement['paid_by']] = settlement_dict.get(
+                settlement['paid_by'], 0) + settlement['total_paid']
+            settlement_dict[settlement['paid_to']] = settlement_dict.get(
+                settlement['paid_to'], 0) - settlement['total_paid']
+
         balance_sheet = {
-            member: {'paid': 0, 'share': 0}
+            member: {'paid': settlement_dict.get(member.id, 0), 'share': 0}
             for member in group.members.all()
         }
 
@@ -84,5 +98,8 @@ def update_gb(group_id):
 
         return f"Changes made to {group.name} with {len(connection.queries)} queries"
 
-    except:
-        return f"Something went wrong"
+    except Exception as e:
+        logger.error(
+            f"Error updating group balance for group ID {group_id}: {e}")
+        logger.debug("Stack Trace:\n" + traceback.format_exc())
+        return f"Something went wrong: {e}"

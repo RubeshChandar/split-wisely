@@ -40,11 +40,23 @@
 </div>
 
 
+
 <div class="collapse" id="collapse_split">
     <div class="card card-body mx-4 mb-2" id="split-content">
         <div id="loading-spinner" class="spinner"></div>
     </div>
 </div>
+
+{% if messages %}
+<ul class="messages mx-4">
+    {% for message in messages %}
+    <li class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 
 <div class="offcanvas offcanvas-end text-bg-dark" style="width: fit-content;" tabindex="-1" id="offcanvasSettlement">
