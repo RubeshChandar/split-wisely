@@ -5,7 +5,7 @@ import traceback
 import logging
 from celery import shared_task
 from django.db import connection, reset_queries, transaction
-`from django.db.models import Sum
+from django.db.models import Sum
 
 logger = logging.getLogger(__name__)
 
