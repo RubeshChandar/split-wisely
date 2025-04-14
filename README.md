@@ -121,6 +121,57 @@ split-wisely/
 * Add expenses to groups, specifying the amount and how it should be split.
 * View group expenses and balances.
 
+---
+
+## ✅ What’s Inside (Implemented Features)
+
+### 🧾 Expense & Settlement Management
+
+- Create and manage groups
+- Add expenses and split them among group members
+- View real-time group balances
+- Settle debts between members
+- Custom split handling via `Split` model
+
+### 🔁 Background Balance Calculation
+
+- Celery task `update_group_balance` triggered on expense/settlement updates
+- Efficient aggregation using Django ORM + `defaultdict`
+- Handles concurrent updates using `select_for_update`
+- `bulk_update` / `bulk_create` for performance
+- Auto-cache invalidation with Redis after task completion
+
+### ⚙️ Optimized Django ORM Usage
+
+- `select_related` and `prefetch_related`
+- Annotated queries with `Sum` for calculations
+- `defaultdict` for clean, performant logic
+
+### 🧠 Smart UI with HTMX
+
+- HTMX-powered partial updates without full page reload
+- Used in:
+  - Member split previews
+  - Settlement form behavior
+  - Modal / Off-canvas interactions
+- Conditional display of messages (e.g. max payable amount)
+
+### 📦 Redis Caching
+
+- Used to cache group-wise computed balances
+- Invalidated via Celery after update
+
+### 🗃 Django Admin Customization
+
+- Admin filters by user/group in Expense and Settlement models
+- Enhanced readability and debugging
+
+### 🧪 Query Debugging
+
+- Used `connection.queries` and `reset_queries()` for optimization analysis
+
+---
+
 ## 🔁 Group Balance Recalculation (Celery Task)
 
 This project uses a background task (`update_group_balance`) to **recalculate each user's net balance** in a group based on their expense and settlement history.
