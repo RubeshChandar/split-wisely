@@ -121,6 +121,66 @@ split-wisely/
 * Add expenses to groups, specifying the amount and how it should be split.
 * View group expenses and balances.
 
+## 🔁 Group Balance Recalculation (Celery Task)
+
+This project uses a background task (`update_group_balance`) to **recalculate each user's net balance** in a group based on their expense and settlement history.
+
+### 💡 Balance Formula:
+
+```
+net_balance = paid - share + out - in
+```
+
+| Term  | Meaning                                   |
+| ----- | ----------------------------------------- |
+| paid  | Total amount the user contributed         |
+| share | Amount the user owes based on splits      |
+| out   | Amount settled (paid to others)           |
+| in    | Amount received from others as settlement |
+
+---
+
+### 📊 Visual Flow:
+
+```text
+       ┌──────────┐       ┌──────────────┐
+       │ Expenses │─────▶ │ paid_by user │────────┐
+       └──────────┘       └──────────────┘        │
+                                                  ▼
+                                          ┌─────────────┐
+       ┌──────────┐       ┌──────────┐    │  balance    │
+       │ Splits   │─────▶ │  user    │───▶│ calculation │
+       └──────────┘       └──────────┘    └─────────────┘
+                                                 ▲
+       ┌─────────────┐     ┌─────────────┐       │
+       │ Settlements │────▶│ paid_to/out │───────┘
+       └─────────────┘     └─────────────┘
+```
+
+---
+
+### ⚙ How It Works:
+
+- Aggregates `Expense`, `Split`, and `Settlement` data efficiently with Django ORM
+- Uses `defaultdict` for clean data accumulation
+- Applies `bulk_update` and `bulk_create` inside a `transaction.atomic()` block
+- Locks rows using `select_for_update()` for consistency
+- Invalidates cache for accurate frontend display
+
+---
+
+### 🚀 Outcome:
+
+Each user’s net balance is always accurate and reflects:
+
+- What they paid
+- What they owe
+- What they’ve paid off (settlements)
+- What they’ve received back
+
+Efficient, reliable, and designed for scale.
+
+
 ## JavaScript Functionality
 
 * **`add-expense.js`:**

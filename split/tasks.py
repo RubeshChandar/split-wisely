@@ -1,11 +1,13 @@
-from django.utils.timezone import now
-from django.core.cache import cache
-from split.models import *
-import traceback
 import logging
+import traceback
+from django.utils.timezone import now
+from collections import defaultdict
+from django.core.cache import cache
 from celery import shared_task
 from django.db import connection, reset_queries, transaction
 from django.db.models import Sum
+
+from split.models import *
 
 logger = logging.getLogger(__name__)
 
@@ -18,36 +20,31 @@ def update_gb(group_id):
         group = Group.objects.get(pk=group_id)
         logger.info(f"Starting to make changes to the {group.name} group")
 
-        # Prefetch the splits for all expenses and selected related to optimise
-        # query perfomances and django calls those paid_by users with a extra query
-        group_expenses = Expense.objects.filter(group=group)\
-            .select_related("group", "paid_by")\
-            .prefetch_related("splits__user")
+        balance_sheet = defaultdict(
+            lambda: {'paid': 0, 'in': 0, 'out': 0, 'share': 0}
+        )
 
-        # Settlement logic here
-        settlements = Settlement.objects.filter(group_id=group_id)\
-            .values("paid_by", "paid_to").annotate(total_paid=Sum("amount"))
+        # Getting the individuals fields needed to calculate the balance
+        for row in Expense.objects.filter(group_id=group_id).values("paid_by").annotate(total=Sum("amount")):
+            balance_sheet[row['paid_by']]['paid'] += row['total']
 
-        # For easier access of the data.
-        settlement_dict = {}
-        for settlement in settlements:
-            settlement_dict[settlement['paid_by']] = settlement_dict.get(
-                settlement['paid_by'], 0) + settlement['total_paid']
-            settlement_dict[settlement['paid_to']] = settlement_dict.get(
-                settlement['paid_to'], 0) - settlement['total_paid']
+        for row in Split.objects.filter(expense__group_id=group_id).values("user").annotate(total=Sum("amount")):
+            balance_sheet[row['user']]['share'] += row['total']
 
-        balance_sheet = {
-            member: {'paid': settlement_dict.get(member.id, 0), 'share': 0}
-            for member in group.members.all()
+        for row in Settlement.objects.filter(group_id=group_id).values("paid_to").annotate(total=Sum("amount")):
+            balance_sheet[row['paid_to']]['in'] += row['total']
+
+        for row in Settlement.objects.filter(group_id=group_id).values("paid_by").annotate(total=Sum("amount")):
+            balance_sheet[row['paid_by']]['out'] += row['total']
+
+        # Much cleaner logic for calculating the group balance.
+        final_balance = {
+            user_id: round(values['paid'] - values['share'] +
+                           values['out'] - values['in'], 2)
+            for user_id, values in balance_sheet.items()
         }
 
-        # Updating the balance sheet
-        for expense in group_expenses:
-            balance_sheet[expense.paid_by]['paid'] += expense.amount
-            for split in expense.splits.all():
-                balance_sheet[split.user]['share'] += split.amount
-
-        logger.info(f"Populated the balance sheet: {balance_sheet}")
+        logger.info(f"Populated the balance sheet: {final_balance}")
 
         with transaction.atomic():
             group_balance = GroupBalance.objects.select_for_update()\
@@ -55,26 +52,25 @@ def update_gb(group_id):
 
             logger.info(f"Group Balance row locked for update")
 
-            gb = {g.user_id: g
-                  for g in group_balance}
+            gb = {g.user_id: g for g in group_balance}
 
-            balance_to_update = []
-            balance_to_create = []
+            balance_to_create, balance_to_update = [], []
 
-            for user, balance in balance_sheet.items():
-                net_balance = balance['paid']-balance["share"]
+            for id, balance in final_balance.items():
 
-                if user.id in gb:
-                    gb[user.id].balance = net_balance
-                    gb[user.id].modified = now()
-                    balance_to_update.append(gb[user.id])
+                if id in gb:
+                    gb[id].balance = balance
+                    gb[id].modified = now()
+                    balance_to_update.append(gb[id])
 
                 else:
-                    balance_to_create.append(GroupBalance(
-                        user=user,
-                        balance=net_balance,
-                        group=group
-                    ))
+                    balance_to_create.append(
+                        GroupBalance(
+                            user_id=id,
+                            balance=balance,
+                            group_id=group_id
+                        )
+                    )
 
             if balance_to_update:
 
