@@ -2,22 +2,55 @@
 
 This project is a clone of the popular expense-splitting application, Splitwise. It's built using Django and HTMX, providing a dynamic and interactive user experience with minimal JavaScript.
 
-## Features
+## ✅ What’s Inside (Implemented Features)
 
-* **Group Expense Management:**
-    * Create and manage groups.
-    * Add expenses to groups.
-    * Split expenses equally or with custom amounts among group members.
-* **User Authentication:**
-    * User registration and login.
-* **Dynamic UI with HTMX:**
-    * Loading indicators during form submissions.
-    * Real-time updates without full page reloads.
-* **Efficient Database Operations:**
-    * Use of `bulk_create` for efficient creation of multiple `Split` instances.
-    * Use of `prefetch_related` and `select_related` to minimize database queries.
-* **Admin Interface:**
-    * Customized Django admin interface for managing expenses and users.
+### 🧾 Expense & Settlement Management
+
+- Create and manage groups
+- Add expenses and split them among group members
+- View real-time group balances
+- Settle debts between members
+- Custom split handling via `Split` model
+
+### 🔁 Background Balance Calculation
+
+- Celery task `update_group_balance` triggered on expense/settlement updates
+- Efficient aggregation using Django ORM + `defaultdict`
+- Handles concurrent updates using `select_for_update`
+- `bulk_update` / `bulk_create` for performance
+- Auto-cache invalidation with Redis after task completion
+
+### ⚙️ Optimized Django ORM Usage
+
+- `select_related` and `prefetch_related`
+- Annotated queries with `Sum` for calculations
+- `defaultdict` for clean, performant logic
+
+### 🧠 Smart UI with HTMX
+
+- HTMX-powered partial updates without full page reload
+- Used in:
+  - Member split previews
+  - Settlement form behavior
+  - Modal / Off-canvas interactions
+- Conditional display of messages (e.g. max payable amount)
+
+### 📦 Redis Caching
+
+- Used to cache group-wise computed balances
+- Invalidated via Celery after update
+
+### 🗃 Django Admin Customization
+
+- Admin filters by user/group in Expense and Settlement models
+- Enhanced readability and debugging
+
+### 🧪 Query Debugging
+
+- Used `connection.queries` and `reset_queries()` for optimization analysis
+
+---
+
 
 ## Project Structure
 ```
@@ -123,54 +156,6 @@ split-wisely/
 
 ---
 
-## ✅ What’s Inside (Implemented Features)
-
-### 🧾 Expense & Settlement Management
-
-- Create and manage groups
-- Add expenses and split them among group members
-- View real-time group balances
-- Settle debts between members
-- Custom split handling via `Split` model
-
-### 🔁 Background Balance Calculation
-
-- Celery task `update_group_balance` triggered on expense/settlement updates
-- Efficient aggregation using Django ORM + `defaultdict`
-- Handles concurrent updates using `select_for_update`
-- `bulk_update` / `bulk_create` for performance
-- Auto-cache invalidation with Redis after task completion
-
-### ⚙️ Optimized Django ORM Usage
-
-- `select_related` and `prefetch_related`
-- Annotated queries with `Sum` for calculations
-- `defaultdict` for clean, performant logic
-
-### 🧠 Smart UI with HTMX
-
-- HTMX-powered partial updates without full page reload
-- Used in:
-  - Member split previews
-  - Settlement form behavior
-  - Modal / Off-canvas interactions
-- Conditional display of messages (e.g. max payable amount)
-
-### 📦 Redis Caching
-
-- Used to cache group-wise computed balances
-- Invalidated via Celery after update
-
-### 🗃 Django Admin Customization
-
-- Admin filters by user/group in Expense and Settlement models
-- Enhanced readability and debugging
-
-### 🧪 Query Debugging
-
-- Used `connection.queries` and `reset_queries()` for optimization analysis
-
----
 
 ## 🔁 Group Balance Recalculation (Celery Task)
 
