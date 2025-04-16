@@ -1,0 +1,419 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="944pt" height="615pt" viewBox="0.00 0.00 944.27 615.20">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 611.2)">
+<title>model_graph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-611.2 940.27,-611.2 940.27,4 -4,4"/>
+<!-- split_models_TimeStampModel -->
+<g id="node1" class="node">
+<title>split_models_TimeStampModel</title>
+<polygon fill="white" stroke="none" points="751.33,-4 751.33,-55.2 874.62,-55.2 874.62,-4 751.33,-4"/>
+<polygon fill="#1b563f" stroke="none" points="752.33,-32.2 752.33,-54.2 873.62,-54.2 873.62,-32.2 752.33,-32.2"/>
+<text text-anchor="start" x="760.37" y="-41.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="768.37" y="-41.2" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">    TimeStampModel    </text>
+<text text-anchor="start" x="754.33" y="-24" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="762.33" y="-24" font-family="Roboto" font-size="8.00" fill="#7b7b7b">created_at</text>
+<text text-anchor="start" x="795.19" y="-24" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="807.19" y="-24" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="815.19" y="-24" font-family="Roboto" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="863.62" y="-24" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="754.33" y="-10.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="762.33" y="-10.4" font-family="Roboto" font-size="8.00" fill="#7b7b7b">modified</text>
+<text text-anchor="start" x="791.21" y="-10.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="807.19" y="-10.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="815.19" y="-10.4" font-family="Roboto" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="863.62" y="-10.4" font-family="Roboto" font-size="8.00">    </text>
+<polygon fill="none" stroke="black" points="751.33,-4 751.33,-55.2 874.62,-55.2 874.62,-4 751.33,-4"/>
+</g>
+<!-- split_models_Group -->
+<g id="node2" class="node">
+<title>split_models_Group</title>
+<polygon fill="white" stroke="none" points="511.87,-118.4 511.87,-232 646.07,-232 646.07,-118.4 511.87,-118.4"/>
+<polygon fill="#1b563f" stroke="none" points="512.87,-201 512.87,-231 645.07,-231 645.07,-201 512.87,-201"/>
+<text text-anchor="start" x="555.8" y="-218" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="563.8" y="-218" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">    Group</text>
+<text text-anchor="start" x="531.61" y="-208" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&lt;</text>
+<text text-anchor="start" x="537.31" y="-208" font-family="Roboto" font-weight="bold" font-style="italic" font-size="10.00" fill="white">TimeStampModel</text>
+<text text-anchor="start" x="610.64" y="-208" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&gt;    </text>
+<text text-anchor="start" x="514.87" y="-192.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="522.87" y="-192.8" font-family="Roboto" font-weight="bold" font-size="8.00">id</text>
+<text text-anchor="start" x="529.55" y="-192.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="572.64" y="-192.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="580.64" y="-192.8" font-family="Roboto" font-weight="bold" font-size="8.00">BigAutoField</text>
+<text text-anchor="start" x="626.42" y="-192.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="514.87" y="-179.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="522.87" y="-179.2" font-family="Roboto" font-weight="bold" font-size="8.00">created_by</text>
+<text text-anchor="start" x="560.64" y="-179.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="572.64" y="-179.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="580.64" y="-179.2" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="635.07" y="-179.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="514.87" y="-165.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="522.87" y="-165.6" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">created_at</text>
+<text text-anchor="start" x="557.09" y="-165.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="572.64" y="-165.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="580.64" y="-165.6" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="629.07" y="-165.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="514.87" y="-152" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="522.87" y="-152" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">modified</text>
+<text text-anchor="start" x="550.87" y="-152" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="572.64" y="-152" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="580.64" y="-152" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="629.07" y="-152" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="514.87" y="-138.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="522.87" y="-138.4" font-family="Roboto" font-size="8.00">name</text>
+<text text-anchor="start" x="540.2" y="-138.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="572.64" y="-138.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="580.64" y="-138.4" font-family="Roboto" font-size="8.00">CharField</text>
+<text text-anchor="start" x="612.64" y="-138.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="514.87" y="-124.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="522.87" y="-124.8" font-family="Roboto" font-size="8.00">slug</text>
+<text text-anchor="start" x="536.21" y="-124.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="572.64" y="-124.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="580.64" y="-124.8" font-family="Roboto" font-size="8.00">SlugField</text>
+<text text-anchor="start" x="611.76" y="-124.8" font-family="Roboto" font-size="8.00">    </text>
+<polygon fill="none" stroke="black" points="511.87,-118.4 511.87,-232 646.07,-232 646.07,-118.4 511.87,-118.4"/>
+</g>
+<!-- split_models_Group&#45;&gt;split_models_TimeStampModel -->
+<g id="edge3" class="edge">
+<title>split_models_Group-&gt;split_models_TimeStampModel</title>
+<path fill="none" stroke="black" d="M654,-123.27C658.71,-120.24 663.39,-117.26 667.97,-114.4 695.21,-97.41 725.92,-79.49 752.04,-64.6"/>
+<polygon fill="none" stroke="black" points="753.53,-67.78 760.5,-59.8 750.07,-61.69 753.53,-67.78"/>
+<text text-anchor="middle" x="744.91" y="-89.2" font-family="Roboto" font-size="8.00"> abstract</text>
+<text text-anchor="middle" x="744.91" y="-79.6" font-family="Roboto" font-size="8.00">inheritance</text>
+</g>
+<!-- users_models_CustomUser -->
+<g id="node7" class="node">
+<title>users_models_CustomUser</title>
+<polygon fill="white" stroke="none" points="216.97,-18.4 216.97,-40.8 292.97,-40.8 292.97,-18.4 216.97,-18.4"/>
+<polygon fill="#1b563f" stroke="none" points="216.97,-18.4 216.97,-40.8 292.97,-40.8 292.97,-18.4 216.97,-18.4"/>
+<text text-anchor="start" x="220.97" y="-27" font-family="Roboto" font-size="8.00">  </text>
+<text text-anchor="start" x="224.97" y="-27" font-family="Roboto" font-size="12.00" fill="white">CustomUser</text>
+<text text-anchor="start" x="284.97" y="-27" font-family="Roboto" font-size="8.00">  </text>
+</g>
+<!-- split_models_Group&#45;&gt;users_models_CustomUser -->
+<g id="edge1" class="edge">
+<title>split_models_Group-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M496.12,-117.27C494.07,-116.27 492.02,-115.31 489.97,-114.4 460.13,-101.09 449.76,-106.52 418.69,-96.4 374.71,-82.08 325.65,-61.76 292.81,-47.5"/>
+<ellipse fill="black" stroke="black" cx="500" cy="-119.26" rx="4" ry="4"/>
+<text text-anchor="middle" x="465.33" y="-84.4" font-family="Roboto" font-size="8.00"> created_by (created_groups)</text>
+</g>
+<!-- split_models_Group&#45;&gt;users_models_CustomUser -->
+<g id="edge2" class="edge">
+<title>split_models_Group-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M543.32,-107.28C534.47,-95.73 524.01,-84.96 511.97,-77.2 479.31,-56.13 375.14,-42.38 309.88,-35.6"/>
+<ellipse fill="black" stroke="black" cx="545.97" cy="-110.91" rx="4" ry="4"/>
+<ellipse fill="black" stroke="black" cx="305.42" cy="-35.14" rx="4" ry="4"/>
+<text text-anchor="middle" x="577.01" y="-84.4" font-family="Roboto" font-size="8.00"> members (enrolledgroups)</text>
+</g>
+<!-- split_models_GroupBalance -->
+<g id="node3" class="node">
+<title>split_models_GroupBalance</title>
+<polygon fill="white" stroke="none" points="631.65,-308.8 631.65,-422.4 762.3,-422.4 762.3,-308.8 631.65,-308.8"/>
+<polygon fill="#1b563f" stroke="none" points="632.65,-391.4 632.65,-421.4 761.3,-421.4 761.3,-391.4 632.65,-391.4"/>
+<text text-anchor="start" x="656.86" y="-408.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="664.86" y="-408.4" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">    GroupBalance</text>
+<text text-anchor="start" x="649.61" y="-398.4" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&lt;</text>
+<text text-anchor="start" x="655.31" y="-398.4" font-family="Roboto" font-weight="bold" font-style="italic" font-size="10.00" fill="white">TimeStampModel</text>
+<text text-anchor="start" x="728.64" y="-398.4" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&gt;    </text>
+<text text-anchor="start" x="634.65" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="642.65" y="-383.2" font-family="Roboto" font-weight="bold" font-size="8.00">id</text>
+<text text-anchor="start" x="649.32" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="688.86" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="696.86" y="-383.2" font-family="Roboto" font-weight="bold" font-size="8.00">BigAutoField</text>
+<text text-anchor="start" x="742.64" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="634.65" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="642.65" y="-369.6" font-family="Roboto" font-weight="bold" font-size="8.00">group</text>
+<text text-anchor="start" x="663.1" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="688.86" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="696.86" y="-369.6" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="751.3" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="634.65" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="642.65" y="-356" font-family="Roboto" font-weight="bold" font-size="8.00">user</text>
+<text text-anchor="start" x="657.32" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="688.86" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="696.86" y="-356" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="751.3" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="634.65" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="642.65" y="-342.4" font-family="Roboto" font-size="8.00">balance</text>
+<text text-anchor="start" x="667.08" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="688.86" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="696.86" y="-342.4" font-family="Roboto" font-size="8.00">DecimalField</text>
+<text text-anchor="start" x="740.41" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="634.65" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="642.65" y="-328.8" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">created_at</text>
+<text text-anchor="start" x="676.86" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="688.86" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="696.86" y="-328.8" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="745.3" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="634.65" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="642.65" y="-315.2" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">modified</text>
+<text text-anchor="start" x="670.65" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="688.86" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="696.86" y="-315.2" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="745.3" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<polygon fill="none" stroke="black" points="631.65,-308.8 631.65,-422.4 762.3,-422.4 762.3,-308.8 631.65,-308.8"/>
+</g>
+<!-- split_models_GroupBalance&#45;&gt;split_models_TimeStampModel -->
+<g id="edge6" class="edge">
+<title>split_models_GroupBalance-&gt;split_models_TimeStampModel</title>
+<path fill="none" stroke="black" d="M769.92,-324.6C801.66,-302.94 835.53,-272.98 852.97,-236 876.03,-187.12 864.91,-167.11 852.97,-114.4 849.46,-98.86 842.69,-82.84 835.72,-69.01"/>
+<polygon fill="none" stroke="black" points="838.86,-67.46 831.1,-60.25 832.67,-70.73 838.86,-67.46"/>
+<text text-anchor="middle" x="884.18" y="-177.6" font-family="Roboto" font-size="8.00"> abstract</text>
+<text text-anchor="middle" x="884.18" y="-168" font-family="Roboto" font-size="8.00">inheritance</text>
+</g>
+<!-- split_models_GroupBalance&#45;&gt;split_models_Group -->
+<g id="edge5" class="edge">
+<title>split_models_GroupBalance-&gt;split_models_Group</title>
+<path fill="none" stroke="black" d="M622.47,-298.32C615.88,-290.32 609.81,-281.89 604.78,-273.2 598.19,-261.81 593.24,-248.71 589.54,-235.89"/>
+<ellipse fill="black" stroke="black" cx="625.2" cy="-301.51" rx="4" ry="4"/>
+<text text-anchor="middle" x="643.88" y="-261.2" font-family="Roboto" font-size="8.00"> group (group_balances)</text>
+</g>
+<!-- split_models_GroupBalance&#45;&gt;users_models_CustomUser -->
+<g id="edge4" class="edge">
+<title>split_models_GroupBalance-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M688.5,-296.27C686.72,-282.28 684.82,-267.66 682.97,-254 671.9,-171.91 698.79,-112.76 623.97,-77.2 567.7,-50.45 386.54,-37.55 300.79,-32.82"/>
+<ellipse fill="black" stroke="black" cx="689.03" cy="-300.42" rx="4" ry="4"/>
+<text text-anchor="middle" x="724.55" y="-172.8" font-family="Roboto" font-size="8.00"> user (user_group_balance)</text>
+</g>
+<!-- split_models_Expense -->
+<g id="node4" class="node">
+<title>split_models_Expense</title>
+<polygon fill="white" stroke="none" points="283.87,-295.2 283.87,-436 418.07,-436 418.07,-295.2 283.87,-295.2"/>
+<polygon fill="#1b563f" stroke="none" points="284.87,-405 284.87,-435 417.07,-435 417.07,-405 284.87,-405"/>
+<text text-anchor="start" x="324.19" y="-422" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="332.19" y="-422" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">    Expense</text>
+<text text-anchor="start" x="303.61" y="-412" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&lt;</text>
+<text text-anchor="start" x="309.31" y="-412" font-family="Roboto" font-weight="bold" font-style="italic" font-size="10.00" fill="white">TimeStampModel</text>
+<text text-anchor="start" x="382.64" y="-412" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&gt;    </text>
+<text text-anchor="start" x="286.87" y="-396.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-396.8" font-family="Roboto" font-weight="bold" font-size="8.00">id</text>
+<text text-anchor="start" x="301.55" y="-396.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-396.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-396.8" font-family="Roboto" font-weight="bold" font-size="8.00">BigAutoField</text>
+<text text-anchor="start" x="398.42" y="-396.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="286.87" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-383.2" font-family="Roboto" font-weight="bold" font-size="8.00">created_by</text>
+<text text-anchor="start" x="332.64" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-383.2" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="407.07" y="-383.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="286.87" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-369.6" font-family="Roboto" font-weight="bold" font-size="8.00">group</text>
+<text text-anchor="start" x="315.32" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-369.6" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="407.07" y="-369.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="286.87" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-356" font-family="Roboto" font-weight="bold" font-size="8.00">paid_by</text>
+<text text-anchor="start" x="322.44" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-356" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="407.07" y="-356" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="286.87" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-342.4" font-family="Roboto" font-size="8.00">amount</text>
+<text text-anchor="start" x="318.87" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-342.4" font-family="Roboto" font-size="8.00">DecimalField</text>
+<text text-anchor="start" x="396.18" y="-342.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="286.87" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-328.8" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">created_at</text>
+<text text-anchor="start" x="329.09" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-328.8" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="401.07" y="-328.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="286.87" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-315.2" font-family="Roboto" font-size="8.00">description</text>
+<text text-anchor="start" x="330.42" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-315.2" font-family="Roboto" font-size="8.00">CharField</text>
+<text text-anchor="start" x="384.64" y="-315.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="286.87" y="-301.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="294.87" y="-301.6" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">modified</text>
+<text text-anchor="start" x="322.87" y="-301.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="344.64" y="-301.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="352.64" y="-301.6" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="401.07" y="-301.6" font-family="Roboto" font-size="8.00">    </text>
+<polygon fill="none" stroke="black" points="283.87,-295.2 283.87,-436 418.07,-436 418.07,-295.2 283.87,-295.2"/>
+</g>
+<!-- split_models_Expense&#45;&gt;split_models_TimeStampModel -->
+<g id="edge10" class="edge">
+<title>split_models_Expense-&gt;split_models_TimeStampModel</title>
+<path fill="none" stroke="black" d="M426.02,-343.86C543.86,-310.99 760.19,-249.27 771.97,-236 793.36,-211.92 804.78,-122.85 809.78,-70.24"/>
+<polygon fill="none" stroke="black" points="813.25,-70.76 810.67,-60.48 806.28,-70.12 813.25,-70.76"/>
+<text text-anchor="middle" x="822.25" y="-177.6" font-family="Roboto" font-size="8.00"> abstract</text>
+<text text-anchor="middle" x="822.25" y="-168" font-family="Roboto" font-size="8.00">inheritance</text>
+</g>
+<!-- split_models_Expense&#45;&gt;split_models_Group -->
+<g id="edge8" class="edge">
+<title>split_models_Expense-&gt;split_models_Group</title>
+<path fill="none" stroke="black" d="M432.7,-297.07C456.87,-277.1 483.14,-255.39 506.67,-235.94"/>
+<ellipse fill="black" stroke="black" cx="429.41" cy="-299.78" rx="4" ry="4"/>
+<text text-anchor="middle" x="518.39" y="-261.2" font-family="Roboto" font-size="8.00"> group (group_expenses)</text>
+</g>
+<!-- split_models_Expense&#45;&gt;users_models_CustomUser -->
+<g id="edge7" class="edge">
+<title>split_models_Expense-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M269.42,-310.46C245.81,-290.17 222.97,-264.93 210.22,-236 188.42,-186.55 197.1,-166.83 210.22,-114.4 216.47,-89.44 231.72,-63.78 242.68,-47.55"/>
+<ellipse fill="black" stroke="black" cx="272.64" cy="-313.16" rx="4" ry="4"/>
+<text text-anchor="middle" x="251.1" y="-172.8" font-family="Roboto" font-size="8.00"> paid_by (paid_expenses)</text>
+</g>
+<!-- split_models_Expense&#45;&gt;users_models_CustomUser -->
+<g id="edge9" class="edge">
+<title>split_models_Expense-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M335.62,-282.62C325.4,-233.25 310.45,-169.48 291.97,-114.4 283.98,-90.58 271.76,-64.24 263.58,-47.57"/>
+<ellipse fill="black" stroke="black" cx="336.51" cy="-286.94" rx="4" ry="4"/>
+<text text-anchor="middle" x="375.34" y="-172.8" font-family="Roboto" font-size="8.00"> created_by (created_expenses)</text>
+</g>
+<!-- split_models_Split -->
+<g id="node5" class="node">
+<title>split_models_Split</title>
+<polygon fill="white" stroke="none" points="285.65,-489.6 285.65,-603.2 416.3,-603.2 416.3,-489.6 285.65,-489.6"/>
+<polygon fill="#1b563f" stroke="none" points="286.65,-572.2 286.65,-602.2 415.3,-602.2 415.3,-572.2 286.65,-572.2"/>
+<text text-anchor="start" x="331.97" y="-589.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="339.97" y="-589.2" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">    Split</text>
+<text text-anchor="start" x="303.61" y="-579.2" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&lt;</text>
+<text text-anchor="start" x="309.31" y="-579.2" font-family="Roboto" font-weight="bold" font-style="italic" font-size="10.00" fill="white">TimeStampModel</text>
+<text text-anchor="start" x="382.64" y="-579.2" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&gt;    </text>
+<text text-anchor="start" x="288.65" y="-564" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="296.65" y="-564" font-family="Roboto" font-weight="bold" font-size="8.00">id</text>
+<text text-anchor="start" x="303.32" y="-564" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="342.86" y="-564" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="350.86" y="-564" font-family="Roboto" font-weight="bold" font-size="8.00">BigAutoField</text>
+<text text-anchor="start" x="396.64" y="-564" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="288.65" y="-550.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="296.65" y="-550.4" font-family="Roboto" font-weight="bold" font-size="8.00">expense</text>
+<text text-anchor="start" x="323.32" y="-550.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="342.86" y="-550.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="350.86" y="-550.4" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="405.3" y="-550.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="288.65" y="-536.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="296.65" y="-536.8" font-family="Roboto" font-weight="bold" font-size="8.00">user</text>
+<text text-anchor="start" x="311.32" y="-536.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="342.86" y="-536.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="350.86" y="-536.8" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="405.3" y="-536.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="288.65" y="-523.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="296.65" y="-523.2" font-family="Roboto" font-size="8.00">amount</text>
+<text text-anchor="start" x="320.65" y="-523.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="342.86" y="-523.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="350.86" y="-523.2" font-family="Roboto" font-size="8.00">DecimalField</text>
+<text text-anchor="start" x="394.41" y="-523.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="288.65" y="-509.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="296.65" y="-509.6" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">created_at</text>
+<text text-anchor="start" x="330.86" y="-509.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="342.86" y="-509.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="350.86" y="-509.6" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="399.3" y="-509.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="288.65" y="-496" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="296.65" y="-496" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">modified</text>
+<text text-anchor="start" x="324.65" y="-496" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="342.86" y="-496" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="350.86" y="-496" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="399.3" y="-496" font-family="Roboto" font-size="8.00">    </text>
+<polygon fill="none" stroke="black" points="285.65,-489.6 285.65,-603.2 416.3,-603.2 416.3,-489.6 285.65,-489.6"/>
+</g>
+<!-- split_models_Split&#45;&gt;split_models_TimeStampModel -->
+<g id="edge13" class="edge">
+<title>split_models_Split-&gt;split_models_TimeStampModel</title>
+<path fill="none" stroke="black" d="M424.17,-543.8C515.4,-538.37 672.29,-517.41 778.97,-440 865.42,-377.28 876.62,-338.69 905.97,-236 920.83,-184.04 927.95,-163.78 905.97,-114.4 897.55,-95.47 882.5,-79.01 866.93,-65.82"/>
+<polygon fill="none" stroke="black" points="869.42,-63.33 859.44,-59.78 865.03,-68.78 869.42,-63.33"/>
+<text text-anchor="middle" x="918.51" y="-266" font-family="Roboto" font-size="8.00"> abstract</text>
+<text text-anchor="middle" x="918.51" y="-256.4" font-family="Roboto" font-size="8.00">inheritance</text>
+</g>
+<!-- split_models_Split&#45;&gt;split_models_Expense -->
+<g id="edge12" class="edge">
+<title>split_models_Split-&gt;split_models_Expense</title>
+<path fill="none" stroke="black" d="M350.97,-477.11C350.97,-464.93 350.97,-452.19 350.97,-439.88"/>
+<ellipse fill="black" stroke="black" cx="350.97" cy="-481.36" rx="4" ry="4"/>
+<text text-anchor="middle" x="376.97" y="-460.4" font-family="Roboto" font-size="8.00"> expense (splits)</text>
+</g>
+<!-- split_models_Split&#45;&gt;users_models_CustomUser -->
+<g id="edge11" class="edge">
+<title>split_models_Split-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M269.1,-534.13C206.48,-521.42 122.12,-494.85 68.97,-440 14.51,-383.8 25.25,-350.42 12.54,-273.2 -2,-184.87 -18.82,-121.5 58.97,-77.2 105.93,-50.46 167.6,-39.02 209.12,-34.16"/>
+<ellipse fill="black" stroke="black" cx="273.37" cy="-534.97" rx="4" ry="4"/>
+<text text-anchor="middle" x="30.76" y="-261.2" font-family="Roboto" font-size="8.00"> user (split)</text>
+</g>
+<!-- split_models_Settlement -->
+<g id="node6" class="node">
+<title>split_models_Settlement</title>
+<polygon fill="white" stroke="none" points="85.65,-302 85.65,-429.2 216.3,-429.2 216.3,-302 85.65,-302"/>
+<polygon fill="#1b563f" stroke="none" points="86.65,-398.2 86.65,-428.2 215.3,-428.2 215.3,-398.2 86.65,-398.2"/>
+<text text-anchor="start" x="119.21" y="-415.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="127.21" y="-415.2" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">    Settlement</text>
+<text text-anchor="start" x="103.61" y="-405.2" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&lt;</text>
+<text text-anchor="start" x="109.31" y="-405.2" font-family="Roboto" font-weight="bold" font-style="italic" font-size="10.00" fill="white">TimeStampModel</text>
+<text text-anchor="start" x="182.64" y="-405.2" font-family="Roboto" font-weight="bold" font-size="10.00" fill="white">&gt;    </text>
+<text text-anchor="start" x="88.65" y="-390" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="96.65" y="-390" font-family="Roboto" font-weight="bold" font-size="8.00">id</text>
+<text text-anchor="start" x="103.32" y="-390" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="142.86" y="-390" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="150.86" y="-390" font-family="Roboto" font-weight="bold" font-size="8.00">BigAutoField</text>
+<text text-anchor="start" x="196.64" y="-390" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="88.65" y="-376.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="96.65" y="-376.4" font-family="Roboto" font-weight="bold" font-size="8.00">group</text>
+<text text-anchor="start" x="117.1" y="-376.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="142.86" y="-376.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="150.86" y="-376.4" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="205.3" y="-376.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="88.65" y="-362.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="96.65" y="-362.8" font-family="Roboto" font-weight="bold" font-size="8.00">paid_by</text>
+<text text-anchor="start" x="124.22" y="-362.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="142.86" y="-362.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="150.86" y="-362.8" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="205.3" y="-362.8" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="88.65" y="-349.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="96.65" y="-349.2" font-family="Roboto" font-weight="bold" font-size="8.00">paid_to</text>
+<text text-anchor="start" x="122.44" y="-349.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="142.86" y="-349.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="150.86" y="-349.2" font-family="Roboto" font-weight="bold" font-size="8.00">ForeignKey (id)</text>
+<text text-anchor="start" x="205.3" y="-349.2" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="88.65" y="-335.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="96.65" y="-335.6" font-family="Roboto" font-size="8.00">amount</text>
+<text text-anchor="start" x="120.65" y="-335.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="142.86" y="-335.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="150.86" y="-335.6" font-family="Roboto" font-size="8.00">DecimalField</text>
+<text text-anchor="start" x="194.41" y="-335.6" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="88.65" y="-322" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="96.65" y="-322" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">created_at</text>
+<text text-anchor="start" x="130.86" y="-322" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="142.86" y="-322" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="150.86" y="-322" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="199.3" y="-322" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="88.65" y="-308.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="96.65" y="-308.4" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">modified</text>
+<text text-anchor="start" x="124.65" y="-308.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="142.86" y="-308.4" font-family="Roboto" font-size="8.00">    </text>
+<text text-anchor="start" x="150.86" y="-308.4" font-family="Roboto" font-style="italic" font-size="8.00" fill="#7b7b7b">DateTimeField</text>
+<text text-anchor="start" x="199.3" y="-308.4" font-family="Roboto" font-size="8.00">    </text>
+<polygon fill="none" stroke="black" points="85.65,-302 85.65,-429.2 216.3,-429.2 216.3,-302 85.65,-302"/>
+</g>
+<!-- split_models_Settlement&#45;&gt;split_models_TimeStampModel -->
+<g id="edge17" class="edge">
+<title>split_models_Settlement-&gt;split_models_TimeStampModel</title>
+<path fill="none" stroke="black" d="M224.1,-300.82C248.11,-282.98 275.88,-265.39 303.97,-254 355.59,-233.08 386.51,-273.17 427.97,-236 469.54,-198.74 428.61,-160.94 459.44,-114.4 474.45,-91.74 482.97,-87.85 507.97,-77.2 579.91,-46.55 668.99,-35.7 732.26,-32.04"/>
+<polygon fill="none" stroke="black" points="732.06,-35.55 741.86,-31.53 731.69,-28.56 732.06,-35.55"/>
+<text text-anchor="middle" x="477.21" y="-177.6" font-family="Roboto" font-size="8.00"> abstract</text>
+<text text-anchor="middle" x="477.21" y="-168" font-family="Roboto" font-size="8.00">inheritance</text>
+</g>
+<!-- split_models_Settlement&#45;&gt;split_models_Group -->
+<g id="edge16" class="edge">
+<title>split_models_Settlement-&gt;split_models_Group</title>
+<path fill="none" stroke="black" d="M231.66,-310.26C243.27,-303.41 255.26,-296.84 266.97,-291.2 312.47,-269.29 325.33,-266.2 374.33,-254 424.8,-241.43 441.53,-254.96 489.97,-236 494.65,-234.17 499.34,-232.06 503.97,-229.75"/>
+<ellipse fill="black" stroke="black" cx="227.95" cy="-312.48" rx="4" ry="4"/>
+<text text-anchor="middle" x="417.65" y="-261.2" font-family="Roboto" font-size="8.00"> group (group_settlements)</text>
+</g>
+<!-- split_models_Settlement&#45;&gt;users_models_CustomUser -->
+<g id="edge14" class="edge">
+<title>split_models_Settlement-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M123.6,-289.61C109.37,-237.48 100.26,-168.01 128.99,-114.4 145.99,-82.68 180.87,-60.91 209.63,-47.53"/>
+<ellipse fill="black" stroke="black" cx="124.8" cy="-293.82" rx="4" ry="4"/>
+<text text-anchor="middle" x="160.98" y="-172.8" font-family="Roboto" font-size="8.00"> paid_by (settle_pb)</text>
+</g>
+<!-- split_models_Settlement&#45;&gt;users_models_CustomUser -->
+<g id="edge15" class="edge">
+<title>split_models_Settlement-&gt;users_models_CustomUser</title>
+<path fill="none" stroke="black" d="M76.58,-290.95C63.86,-274.18 52.52,-255.51 45.54,-236 27.35,-185.11 15.29,-159.18 45.54,-114.4 81.93,-60.53 159.19,-41.29 209.01,-34.42"/>
+<ellipse fill="black" stroke="black" cx="79.34" cy="-294.48" rx="4" ry="4"/>
+<text text-anchor="middle" x="75.76" y="-172.8" font-family="Roboto" font-size="8.00"> paid_to (settle_pt)</text>
+</g>
+</g>
+</svg>

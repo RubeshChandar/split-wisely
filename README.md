@@ -154,6 +154,10 @@ split-wisely/
 
 ---
 
+## 🧩 Django Model Diagram
+
+![Model Graph](./models.svg)
+
 
 ## 🔁 Group Balance Recalculation (Celery Task)
 
