@@ -49,8 +49,6 @@ This project is a clone of the popular expense-splitting application, Splitwise.
 
 - Used `connection.queries` and `reset_queries()` for optimization analysis
 
----
-
 
 ## Project Structure
 ```
