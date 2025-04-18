@@ -1,9 +1,15 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 # This line prevents django by writing the pyc files inside container which aren't necessary
-ENV PYTHONDONTWRITEBYTECODE = 1 
+ENV PYTHONDONTWRITEBYTECODE=1 
 # Sends logs to container without buffering (Kind of convention to add in every python image)
-ENV PYTHONUNBUFFERED = 1
+ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app 
 
