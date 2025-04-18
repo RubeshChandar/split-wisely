@@ -9,4 +9,3 @@ initial-datadump.json
 redis_data
 .DS_Store
 scripts
-gitsh.sh
