@@ -216,3 +216,31 @@ input:read-only:focus {
         transform: rotate(360deg);
     }
 }
+
+.edit-tools {
+    text-align: center;
+    position: relative;
+}
+
+.edit-tools::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #7d7d7d transparent;
+}
+
+.edit-tools>div {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    width: fit-content;
+    background-color: #7d7d7d;
+}
+
+.edit-tools>div>button {
+    font-weight: bold;
+    margin: 0px 5px;
+}

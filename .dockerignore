@@ -6,3 +6,5 @@ db_data
 initial-datadump.json
 redis_data
 gitsh.sh
+models.svg
+README.md

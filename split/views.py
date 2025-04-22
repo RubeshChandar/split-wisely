@@ -42,11 +42,10 @@ def singleGroupView(request, slug):
     }
 
     for expense in expenses:
-
         split_amount = user_splits.get(expense.id, 0)
 
         # Check if the user split is 0 but even if it is zero he might have lent money,
-        # but if the user didn;t pay it then he wasn't probably involved with this split so returning 0
+        # but if the user didn't pay it then he wasn't probably involved with this split so returning 0
         if split_amount == 0 and expense.paid_by_id != request.user.id:
             expense.lent_or_borrowed = 0
             continue
