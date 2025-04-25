@@ -1,0 +1,43 @@
+<div class="modal fade" id="deleteConfirmation" data-bs-backdrop="static" tabindex="-1"  data-bs-theme="dark">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4 text-light fw-bolder">
+          Do you want to delete this transaction?
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light fw-bold fs-5">
+        {% if transaction.isSettlement %}
+        Delete <span class="text-danger mx-1 my-0">£{{transaction.amount}}</span> settlement to {{transaction.paid_to}}
+        {% else %}
+        <h1>Hi</h1>
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning fw-bold" data-bs-dismiss="modal">No, Cancel</button>
+        <button type="button" class="btn btn-danger fw-bold" 
+        hx-vals='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'
+        hx-post="{% url "delete-settlement" pk=transaction.pk %}">
+        Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.body.addEventListener('settlementDeleted', function() {
+    var modalElement = document.getElementById('deleteConfirmation');
+    var modal = bootstrap.Modal.getInstance(modalElement);
+
+    if (!modal) {
+        modal = new bootstrap.Modal(modalElement);
+    }
+
+    modal.hide(); // Properly close modal
+
+    setTimeout(function() {
+        window.location.reload(); // Reload page after modal hides
+    }, 500); // 500ms delay for smooth animation
+});
+</script>

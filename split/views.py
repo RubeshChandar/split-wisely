@@ -179,3 +179,25 @@ def check_settle_amount(request, slug):
     amount = transactions.get(
         (str(request.user.username).capitalize(), user), 0)
     return render(request, "split/partials/max-settle.html", {"exists": True, "pt": user, "amt": amount})
+
+
+@login_required
+def delete_settlement(request, pk):
+    transaction = get_object_or_404(Settlement, pk=pk)
+    transaction.isSettlement = True
+
+    if request.method == "POST":
+
+        if request.user == transaction.paid_by:
+            transaction.delete()
+            messages.add_message(
+                request, messages.SUCCESS, "Settlement deleted successfully")
+        else:
+            messages.add_message(
+                request, messages.WARNING, "Couldn't delete this settlement as it wasn't made by you!")
+
+        response = HttpResponse(status=204)
+        response["HX-Trigger"] = "settlementDeleted"
+        return response
+
+    return render(request, "split/partials/trans-delete.html", {"transaction": transaction})
