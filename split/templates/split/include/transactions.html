@@ -1,0 +1,74 @@
+{% load filter_extra %}
+
+{% for transaction in transactions  %}
+<div class="accordion-item">
+    {% if transaction.isSettlement %}
+    <a data-bs-toggle="collapse" data-bs-target="#flush-{{transaction.id}}">
+        <li class="transaction fw-bold">
+            <div class="date text-center">
+                {{transaction.created_at|cus_date|safe}}
+            </div>
+            <div class="desc text-primary">
+                {{transaction.paid_by|check_replace_username_for_trans:request.user.username|safe}}
+                made a settlement to {{transaction.paid_to}}
+            </div>
+
+            <div class="bal fs-4 fw-bolder">
+                £{{transaction.amount}}
+            </div>
+
+        </li>
+    </a>
+    <div id="flush-{{transaction.id}}" class="accordion-collapse collapse edit-tools" data-bs-parent="#accordionFlush">
+        <div class="badge rounded-pill">
+            <button type="button" class="btn btn-warning">
+                <i class="fa-solid fa-pen mx-1"></i> Edit</button>
+            <button type="button" class="btn btn-danger">
+                <i class="fa-solid fa-trash-can mx-1"></i> Delete</button>
+        </div>
+    </div>
+
+    {% else %}
+    <a data-bs-toggle="collapse" data-bs-target="#flush-{{transaction.id}}">
+        <li class="transaction fw-bold">
+            <div class="date text-center">
+                {{transaction.created_at|cus_date|safe}}
+            </div>
+            <div class="desc">
+                {{transaction.description}}
+            </div>
+
+            {% if transaction.lent_or_borrowed < 0 %}
+
+            <div class="bal text-danger">
+                You Borrowed <br>£{{ transaction.lent_or_borrowed|abs}}
+            </div>
+
+            {% elif  transaction.lent_or_borrowed > 0  %}
+
+            <div class="bal text-success">
+                You Lent <br>£{{ transaction.lent_or_borrowed}}
+            </div>
+
+            {% else %}
+            <div class="bal text-primary">
+                No Dues <br> £0
+            </div>
+            {% endif %}
+
+        </li>
+    </a>
+    <div id="flush-{{transaction.id}}" class="accordion-collapse collapse edit-tools" data-bs-parent="#accordionFlush">
+        <div class="badge rounded-pill">
+            <button type="button" class="btn btn-warning">
+                <i class="fa-solid fa-pen mx-1"></i> Edit</button>
+            <button type="button" class="btn btn-dark">
+                <i class="fa-solid fa-eye mx-1"></i>Shares</button>
+            <button type="button" class="btn btn-danger">
+                <i class="fa-solid fa-trash-can mx-1"></i> Delete</button>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endfor %}

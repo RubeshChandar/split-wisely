@@ -10,7 +10,7 @@ urlpatterns = [
 ]
 
 htmx_urlpatterns = [
-    path("<slug:slug>/settle/", views.Settlement.as_view(), name="settle"),
+    path("<slug:slug>/settle/", views.SettlementView.as_view(), name="settle"),
     path("<slug:slug>/check-settlement/",
          views.check_settle_amount, name="check-settle"),
 ]

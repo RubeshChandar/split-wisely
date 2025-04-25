@@ -55,7 +55,7 @@ def cash_flow_finder(balances):
     # We need to add users as nodes with demand to 0 to not move any money
     # and also convert the balance to int as only networkx works only with int
     for user, balance in balances.items():
-        G.add_node(user, demand=int(balance*100))
+        G.add_node(user, demand=int(round(balance*100)))
 
     users = list(balances.keys())
 
@@ -91,7 +91,6 @@ def get_or_make_calc(slug):
             for g in gb
         }
 
-        print(balance)
         print(cash_flow_finder(balance))
 
         # transactions = cash_flow_finder(balance)

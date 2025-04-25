@@ -25,3 +25,10 @@ def replace_username_with_you_2(value: str, user: str):
     if (value.capitalize() == user.capitalize()):
         return "<b style='color:red;'>You</b>"
     return f"<b>{value}</b>"
+
+
+@register.filter(name='check_replace_username_for_trans')
+def replace_username_for_transaction(value, user: str):
+    if (value.username.capitalize() == user.capitalize()):
+        return "<b style='color:red;'>You</b>"
+    return f"<b style='color:red;'>{value.username.capitalize()}</b>"

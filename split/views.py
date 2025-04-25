@@ -43,7 +43,7 @@ def singleGroupView(request, slug):
 
     for expense in expenses:
         split_amount = user_splits.get(expense.id, 0)
-
+        expense.isSettlement = False
         # Check if the user split is 0 but even if it is zero he might have lent money,
         # but if the user didn't pay it then he wasn't probably involved with this split so returning 0
         if split_amount == 0 and expense.paid_by_id != request.user.id:
@@ -61,9 +61,21 @@ def singleGroupView(request, slug):
         else:
             expense.lent_or_borrowed = expense.amount - split_amount
 
+    settlements = Settlement.objects.filter(group=group)\
+        .select_related("paid_to", "paid_by")
+
+    for settlement in settlements:
+        settlement.isSettlement = True
+
+    transactions = sorted(
+        list(expenses) + list(settlements),
+        key=lambda trans: trans.created_at,
+        reverse=True
+    )
+
     return render(request, "split/single-group.html", {
         "group": group,
-        "expenses": expenses,
+        "transactions": transactions,
         "gb": group.group_balances.get(user=request.user)
     })
 
@@ -110,7 +122,7 @@ def members_split(request, slug):
     })
 
 
-class Settlement(LoginRequiredMixin, View):
+class SettlementView(LoginRequiredMixin, View):
 
     def get(self, request, slug):
         group = Group.objects.get(slug=slug)
