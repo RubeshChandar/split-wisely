@@ -1,3 +1,4 @@
+from django.db import connection
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
@@ -182,22 +183,37 @@ def check_settle_amount(request, slug):
 
 
 @login_required
-def delete_settlement(request, pk):
-    transaction = get_object_or_404(Settlement, pk=pk)
-    transaction.isSettlement = True
+def delete_transaction(request, pk, trans_type):
+    if trans_type == "settlement":
+        transaction = get_object_or_404(Settlement, pk=pk)
+        transaction.isSettlement = True
+    else:
+        transaction = get_object_or_404(Expense, pk=pk)
+        transaction.isSettlement = False
 
     if request.method == "POST":
 
-        if request.user == transaction.paid_by:
+        if trans_type == "expense" or \
+                (trans_type == "settlement" and request.user == transaction.paid_by):
             transaction.delete()
             messages.add_message(
-                request, messages.SUCCESS, "Settlement deleted successfully")
+                request, messages.SUCCESS, f"{trans_type.capitalize()} deleted successfully")
         else:
             messages.add_message(
-                request, messages.WARNING, "Couldn't delete this settlement as it wasn't made by you!")
+                request, messages.WARNING, f"Couldn't delete this {trans_type} as it wasn't made by you!")
 
         response = HttpResponse(status=204)
-        response["HX-Trigger"] = "settlementDeleted"
+        response["HX-Trigger"] = "transactionDeleted"
         return response
 
     return render(request, "split/partials/trans-delete.html", {"transaction": transaction})
+
+
+@login_required
+def get_shares(request, pk):
+    expense = get_object_or_404(Expense, pk=pk)
+    shares = expense.splits.prefetch_related("user")
+    return render(request, "split/partials/view-shares.html", {
+        "expense": expense,
+        "shares": shares
+    })

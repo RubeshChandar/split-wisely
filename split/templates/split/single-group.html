@@ -51,6 +51,9 @@
 <ul class="messages mx-4">
     {% for message in messages %}
     <li class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {% if message.tags == "warning" %}
+        <i class="fa-solid fa-triangle-exclamation text-danger me-1"></i>
+        {% endif %}
         <strong>{{message}}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </li>

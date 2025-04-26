@@ -14,7 +14,10 @@ htmx_urlpatterns = [
     path("<slug:slug>/check-settlement/",
          views.check_settle_amount, name="check-settle"),
     path("settle/<int:pk>/delete/",
-         views.delete_settlement, name="delete-settlement")
+         views.delete_transaction, {'trans_type': 'settlement'}, name="delete-settlement"),
+    path("expense/<int:pk>/delete/",
+         views.delete_transaction, {'trans_type': 'expense'}, name="delete-expense"),
+    path("expense/<int:pk>/view-shares/", views.get_shares, name="view-shares")
 ]
 
 

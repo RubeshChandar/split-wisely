@@ -1,0 +1,46 @@
+<div class="modal fade" id="viewShares" tabindex="-1"
+ data-bs-theme="dark">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title text-light fs-5">
+            <i class="fa-solid fa-wallet text-warning me-2"></i>
+            Individual shares 
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light">
+        
+        <div class="fw-bold" style="font-size:1.2rem">
+            Expense Description : <span class="text-warning"> {{expense.description}}</span> <br>
+            Amount Spent : <span class="text-success">£ {{expense.amount}} <br>
+            </span>
+            Paid by : <span class="text-danger">{{expense.paid_by}}</span>  <br>
+        </div>
+        
+        <table class="table table-hover table-bordered border-primary mt-3 fs-5">
+        <thead >
+            <tr >
+            <th scope="col">#</th>
+            <th scope="col">User</th>
+            <th scope="col">Share</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for share in shares %}
+            <tr> 
+            <th scope="row"> {{forloop.counter}} </th>
+            <td class="fw-bold">{{share.user}} </td>
+            <td class="text-success fw-bold">£ {{share.amount}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

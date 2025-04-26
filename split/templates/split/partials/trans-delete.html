@@ -11,14 +11,20 @@
         {% if transaction.isSettlement %}
         Delete <span class="text-danger mx-1 my-0">£{{transaction.amount}}</span> settlement to {{transaction.paid_to}}
         {% else %}
-        <h1>Hi</h1>
+        Delete <span class="text-danger">£{{transaction.amount}}</span> Expense <br>
+        Expense description : <span class="text-warning">{{transaction.description}}</span> 
         {% endif %}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-warning fw-bold" data-bs-dismiss="modal">No, Cancel</button>
         <button type="button" class="btn btn-danger fw-bold" 
         hx-vals='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'
-        hx-post="{% url "delete-settlement" pk=transaction.pk %}">
+        {% if transaction.isSettlement %}
+        hx-post="{% url "delete-settlement" pk=transaction.pk %}"
+        {% else %}
+        hx-post="{% url "delete-expense" pk=transaction.pk %}"
+        {% endif %}
+        >
         Yes, Delete</button>
       </div>
     </div>
@@ -26,7 +32,7 @@
 </div>
 
 <script>
-document.body.addEventListener('settlementDeleted', function() {
+document.body.addEventListener('transactionDeleted', function() {
     var modalElement = document.getElementById('deleteConfirmation');
     var modal = bootstrap.Modal.getInstance(modalElement);
 
