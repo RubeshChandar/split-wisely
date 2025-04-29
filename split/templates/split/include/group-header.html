@@ -2,18 +2,19 @@
 
     {% if request.resolver_match.view_name == "single-group"%}
     <a href="{% url "home" %}" class="back d-flex align-items-center">
-        <i class="fa-solid fa-house-chimney"></i> Home Page
+        <i class="fa-solid fa-house-chimney"></i> <span class="d-none d-md-inline"> Home Page</span>
     </a>
     {% else %}
     <a href="{% url "single-group" slug=group.slug %}" class="back d-flex align-items-center">
-        <i class="fa-solid fa-arrow-left"></i> Back
+        <i class="fa-solid fa-arrow-left"></i> <span class="d-none d-md-inline"> Back</span>
     </a>
 
     {% endif %}
 
-    <h1> <i class="fa-solid fa-people-group"></i>{{group.name}}</h1>
+    <h1 class="m-0"> <i class="fa-solid fa-people-group d-none d-md-inline"></i>{{group.name}}</h1>
 
-    <a href="" class="group_settings d-flex align-items-center">
-        <i class="fa-solid fa-gear"></i>Settings
+    <a href="" class="group_settings d-flex align-items-center ">
+        <i class="fa-solid fa-gear"></i><span class="d-none d-md-inline">Settings</span>
     </a>
 </div>
+

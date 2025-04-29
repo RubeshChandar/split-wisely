@@ -244,3 +244,43 @@ input:read-only:focus {
     font-weight: bold;
     margin: 0px 5px;
 }
+
+
+/* Mobile approach */
+@media (max-width: 768px) {
+    .tools {
+        flex-direction: column;
+        padding: 10px 20px;
+        gap: 10px;
+    }
+
+    .tools p {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .tools a {
+        width: 80%;
+    }
+
+    .transaction {
+        display: flex;
+        align-items: center;
+    }
+
+    .date {
+        width: 30%;
+    }
+
+    .desc {
+        width: 60%;
+        font-size: 1.3rem;
+        text-overflow: ellipsis;
+    }
+
+    .bal {
+        width: 20%;
+        text-align: end;
+    }
+
+}
