@@ -4,10 +4,11 @@ from . import views
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("new-create-group/", views.create_grp, name="new-group"),
     path("<slug:slug>/", views.singleGroupView, name="single-group"),
-    path("<slug:slug>/members-split", views.members_split, name="members_split"),
+    path("<slug:slug>/members-split/", views.members_split, name="members_split"),
     path("<slug:slug>/add-expense/", views.add_expense, name="add_expense"),
-    path("<slug:slug>/manage-members",
+    path("<slug:slug>/manage-members/",
          views.manage_members, name="manage_members"),
 ]
 

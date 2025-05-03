@@ -23,12 +23,27 @@
 
     <div id="user-suggestions" class="list-group" style="max-width: fit-content;"></div>
 
+    {% if messages %}
+    {% for message in messages  %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-triangle-exclamation me-2"></i>
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
     <h1 class="text-warning">Current Members :</h1>
     <ol class="list-group list-group-numbered">
         {% for member in group.members.all  %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-            <div class="fw-bold">{{member.username|title}}</div>
+            <div class="fw-bold">
+                {{member.username|title}}
+                {% if group.created_by == member %}
+                <span class="badge text-bg-success ms-2">Admin</span>
+                {% endif %}
+            </div>
           <i class="fa-solid fa-envelope me-2 text-primary"></i> {{member.email}}
             </div>
             <a  hx-post="{% url "remove_member" slug=group.slug pk=member.id %}" hx-swap="none"

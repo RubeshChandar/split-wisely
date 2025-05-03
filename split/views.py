@@ -227,7 +227,11 @@ def manage_members(request, slug, pk=None, action=None):
         if action == "add":
             group.members.add(pk)
         if action == "remove":
-            group.members.remove(pk)
+            if pk != group.created_by_id:
+                group.members.remove(pk)
+            else:
+                messages.add_message(
+                    request, messages.WARNING, "Admin can't be removed")
 
         return HttpResponse(status=200, headers={"HX-Refresh": "true"})
     return render(request, "split/manage-members.html", {"group": group})
@@ -246,3 +250,17 @@ def search_user(request, slug):
         .filter(Q(username__icontains=term) | Q(email__icontains=term))[:5]
 
     return render(request, "split/partials/users-list.html", {"users": users, "slug": slug})
+
+
+@login_required
+def create_grp(request):
+    grp_name = request.POST.get("new_group_name", None)
+    group, created = Group.objects.get_or_create(
+        name=grp_name, created_by=request.user)
+
+    if not created:
+        messages.add_message(request, messages.WARNING,
+                             "You tried to create a group with the same name")
+
+    group.members.add(request.user)
+    return redirect("single-group", slug=group.slug)
