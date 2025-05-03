@@ -1,63 +1,58 @@
 {% load widget_tweaks %}
-
-
-<form hx-post="{% url "settle" slug=group.slug%}" class="text-center" method="POST" hx-target="#offcanvas-body"
-    hx-swap="innerHTML">
+<form hx-post="{% url "settle" slug=group.slug %}"
+      class="text-center"
+      method="POST"
+      hx-target="#offcanvas-body"
+      hx-swap="innerHTML">
     {% csrf_token %}
-
     <p style="font-weight:bold;font-size:1.2rem">
         You are making a settlement as
-        <span style="color:red; margin:0">
-            {{request.user.username|title}}
-        </span>
+        <span style="color:red; margin:0">{{ request.user.username|title }}</span>
     </p>
-
     <div class="row d-flex align-items-center">
         <label for="inputPassword" class="col-sm-4 col-form-label">PAID TO</label>
         <div class="col-sm-8">
             {% render_field form.paid_to class+="form-control" hx-trigger="change" hx-swap="innerHTML" hx-target="#max-payment-message" hx-get="check-settlement/" %}
         </div>
-
     </div>
-
     <div class="row d-flex align-items-center">
         <label class="col-sm-4 col-form-label">AMOUNT</label>
-        <div class="col-sm-8">
-            {% render_field form.amount class+="form-control" placeholder="0" id="id_amount" min="0"%}
-        </div>
+        <div class="col-sm-8">{% render_field form.amount class+="form-control" placeholder="0" id="id_amount" min="0" %}</div>
     </div>
-
-    <div id="max-payment-message" role="alert">
-
-    </div>
-
+    <div id="max-payment-message" role="alert"></div>
     {% if form.errors %}
-    <ul class="messages">
-        {% for field in form %}
-        {% for error in field.errors %}
-        <li class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{field.label}}</strong>: {{error}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </li>
-        {% endfor %}
-        {% endfor %}
-    </ul>
+        <ul class="messages">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ field.label }}</strong>: {{ error }}
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
     {% endif %}
-
     {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <strong>{{message}}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </li>
-        {% endfor %}
-    </ul>
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                    role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                </li>
+            {% endfor %}
+        </ul>
     {% endif %}
-
-    <button class="btn btn-warning p-2 mt-3 fw-bold" style="width: 100%;" type="submit">SETTLE</button>
+    <button class="btn btn-warning p-2 mt-3 fw-bold"
+            style="width: 100%"
+            type="submit">SETTLE</button>
 </form>
-
 <script>
     document.addEventListener("settlementSuccess", function () {
         var offcanvas = document.getElementById('offcanvasSettlement');

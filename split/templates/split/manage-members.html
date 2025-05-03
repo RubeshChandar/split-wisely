@@ -1,0 +1,43 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% load filter_extra %}
+
+{% block title %} Mange Group Members {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "split/single-group.css" %}">
+{% endblock css %}
+
+{% block content %}
+{% include "split/include/group-header.html" %}
+
+<div class="container mt-3" data-bs-theme="dark">
+    <div class="input-group">
+        <span class="input-group-text" id="basic-addon1">@</span>
+
+        <input type="text" class="form-control" placeholder="Search by Username / E-mail" name="term"
+        hx-get="{% url "search-user" slug=group.slug%}" hx-target="#user-suggestions"
+        hx-trigger="keyup changed delay:300ms" autocomplete="off" hx-swap="innerHTML">
+
+    </div>
+
+    <div id="user-suggestions" class="list-group" style="max-width: fit-content;"></div>
+
+    <h1 class="text-warning">Current Members :</h1>
+    <ol class="list-group list-group-numbered">
+        {% for member in group.members.all  %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="fw-bold">{{member.username|title}}</div>
+          <i class="fa-solid fa-envelope me-2 text-primary"></i> {{member.email}}
+            </div>
+            <a  hx-post="{% url "remove_member" slug=group.slug pk=member.id %}" hx-swap="none"
+                hx-trigger="click" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                <i class="fa-solid fa-trash text-danger" style="font-size:1.2rem"></i>
+            </a>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+
+{% endblock content %}

@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from django.views import View
 from django.contrib import messages
 
@@ -217,3 +217,32 @@ def get_shares(request, pk):
         "expense": expense,
         "shares": shares
     })
+
+
+@login_required
+def manage_members(request, slug, pk=None, action=None):
+    group = Group.objects.get(slug=slug)
+
+    if request.method == "POST":
+        if action == "add":
+            group.members.add(pk)
+        if action == "remove":
+            group.members.remove(pk)
+
+        return HttpResponse(status=200, headers={"HX-Refresh": "true"})
+    return render(request, "split/manage-members.html", {"group": group})
+
+
+def search_user(request, slug):
+    term = request.GET.get("term")
+
+    if term == "":
+        return render(request, "split/partials/users-list.html")
+
+    group_members = Group.objects.get(
+        slug=slug).members.values_list("id", flat=True)
+
+    users = User.objects.exclude(id__in=group_members) \
+        .filter(Q(username__icontains=term) | Q(email__icontains=term))[:5]
+
+    return render(request, "split/partials/users-list.html", {"users": users, "slug": slug})

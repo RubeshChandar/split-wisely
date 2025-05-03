@@ -6,6 +6,7 @@
     position: sticky;
     top: 0;
     width: 100%;
+    z-index: 10000;
 }
 
 .group_title i {
@@ -243,6 +244,15 @@ input:read-only:focus {
 .edit-tools>div>button {
     font-weight: bold;
     margin: 0px 5px;
+}
+
+.dropdown-menu {
+    overflow: hidden;
+}
+
+.dropdown-menu i {
+    font-size: 1.2rem !important;
+    width: 10px;
 }
 
 

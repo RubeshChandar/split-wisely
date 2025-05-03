@@ -1,0 +1,18 @@
+<div class="list-group  mb-5">
+{% if users %}
+    {% for user in users  %}
+    <li class="list-group-item  d-flex flex-row justify-content-between align-items-center">
+        <h4> {{user.username|title}} ({{user.email}})</h4>
+        <a role="button" class="btn btn-success ms-3" 
+        hx-post="{% url "add_member" slug=slug pk=user.id %}" hx-swap="none"
+        hx-trigger="click" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+            <i class="fa-solid fa-user-plus"></i> Add User
+        </a>
+    </li>
+    {% endfor %}
+    {% else %}
+    <a class="list-group-item list-group-item-action"> 
+        <h4 class="text-danger">No suggestions to show... Type something else..</h4>
+    </a>
+    {% endif %}
+</div>
