@@ -190,9 +190,9 @@ The following Gantt chart outlines the complete development journey of Splitwise
 Each bar represents a continuous phase of work — no idle gaps, just consistent progress 🚀
 
 📌 Legend
-• Tasks are aligned chronologically
-• Timeline shown in MM/YY format
-• Color-coded for visual clarity
+* Tasks are aligned chronologically
+* Timeline shown in MM/YY format
+* Color-coded for visual clarity
 
 📊 Gantt Chart
 
