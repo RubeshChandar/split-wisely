@@ -57,7 +57,7 @@ class SignupForm(LoginForm):
         cleaned_data = super().clean()
         username = str(cleaned_data.get('username')).replace(' ', '')
         # updating username
-        cleaned_data['username'] = username
+        cleaned_data['username'] = username.lower()
         email = cleaned_data.get('email')
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')

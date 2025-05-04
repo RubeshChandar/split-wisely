@@ -25,24 +25,26 @@
             Signout
         </a>
     </div>
-
+    
+    <!--Mobile-->
     <div class="d-block d-md-none">
-    <div class="dropdown" data-bs-theme="dark" data-bs-toggle="dropdown" >
-        <button class="btn btn-secondary dropdown-toggle" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <ul class="dropdown-menu" style="overflow: hidden;">
-            <li><a class="dropdown-item" data-bs-target="#createGoupModal" data-bs-toggle="modal">            
-                <i class="fa-solid fa-users-line me-2"></i>
-                <span class="text-warning fw-bold">Create Group</span>
-            </a></li>
-            <li><a class="dropdown-item" href="{% url "signout" %}">
-                <i class="fa-solid fa-right-from-bracket me-2"></i>
-                <span class="text-danger fw-bold">Signout</span>
-            </a></li>
-        </ul>
+        <div class="dropdown" data-bs-theme="dark" data-bs-toggle="dropdown" >
+            <button class="btn btn-secondary dropdown-toggle" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="dropdown-menu" style="overflow: hidden;">
+                <a class="dropdown-item" data-bs-target="#createGoupModal" data-bs-toggle="modal">            
+                    <i class="fa-solid fa-users-line me-2"></i>
+                    <span class="text-warning fw-bold">Create Group</span>
+                </a>
+                <a class="dropdown-item" href="{% url "signout" %}" id="signout-link">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                    <span class="text-danger fw-bold">Signout</span>
+                </a>
+            </ul>
+        </div>
     </div>
-    </div>
+
 </div>
 
 
@@ -118,7 +120,7 @@ data-bs-keyboard="false" tabindex="-1" data-bs-theme="dark">
             {% csrf_token %}
             <h6 class="text-primary fw-bold mb-2"> Enter the name of new group:</h6>
             <input type="text" class="form-control" name="new_group_name">
-      </div>
+        </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
@@ -130,4 +132,19 @@ data-bs-keyboard="false" tabindex="-1" data-bs-theme="dark">
   </div>
 </div>
 
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const signoutLink = document.querySelector('#signout-link');
+
+    if (signoutLink) {
+      signoutLink.addEventListener('click', function (e) {
+        e.preventDefault();  // prevent default anchor behavior
+        window.location.href = signoutLink.href;  // manually redirect
+      });
+    }
+  });
+
+</script>
 {% endblock content %}
