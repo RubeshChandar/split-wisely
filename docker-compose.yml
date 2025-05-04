@@ -20,7 +20,7 @@ services:
 
   django-app:
     build: .
-    image: split-wisely
+    image: splitwisely
     container_name: django-splitwisely
     command: /app/entrypoint.sh
     ports:
@@ -44,7 +44,7 @@ services:
       - ./redis_data:/data
 
   celery:
-    image: split-wisely
+    image: splitwisely
     container_name: celery-splitwisely
     command: celery -A splitwise worker -E -l info
     volumes:
@@ -55,7 +55,7 @@ services:
       - django-app
 
   flower:
-    image: split-wisely
+    image: splitwisely
     container_name: flower-splitwisely
     command: celery -A splitwise flower --basic_auth=${FLOWER_USER_NAME}:${FLOWER_PASSWORD}
     ports:
