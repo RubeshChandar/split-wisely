@@ -53,7 +53,7 @@ This project is a clone of the popular expense-splitting application, Splitwise.
 ## Project Structure
 ```
 split-wisely/
-├── split/           # Django project settings
+├── splitwisely/           # Django project settings
 │   ├── pycache/
 │   ├── init.py
 │   ├── asgi.py
