@@ -125,3 +125,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CSRF_TRUSTED_ORIGINS = ["https://splitwisely.rubeshchandar.com",
+                        "https://www.splitwisely.rubeshchandar.com"]
