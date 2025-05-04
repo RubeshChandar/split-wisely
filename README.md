@@ -53,13 +53,36 @@ This project is a clone of the popular expense-splitting application, Splitwise.
 ## Project Structure
 ```
 split-wisely/
-├── splitwise/           # Django project settings
+├── split/           # Django project settings
 │   ├── pycache/
 │   ├── init.py
 │   ├── asgi.py
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
+├── split/
+│   ├─ **pycache**/
+│   ├─ migrations/
+│   ├─ scripts/
+│   │ ├─ **init**.py
+│   │ └─ ad_script.py
+│   ├─ static/
+│   ├─ templates/
+│   │ └─ split/
+│   ├─ templatetags/
+│   │ ├─ **pycache**/
+│   │ ├─ **init**.py
+│   │ └─ filter_extra.py
+│   ├─ **init**.py
+│   ├─ admin.py
+│   ├─ apps.py
+│   ├─ forms.py
+│   ├─ helperfun.py
+│   ├─ models.py
+│   ├─ signals.py
+│   ├─ tasks.py
+│   ├─ urls.py
+│   └─ views.py
 ├── static/              # Static files (CSS)
 │   ├── auth.css
 │   └── global.css
