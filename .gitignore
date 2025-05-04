@@ -10,3 +10,5 @@ redis_data
 .DS_Store
 scripts
 **/management/
+staticfiles/
+prod_conf

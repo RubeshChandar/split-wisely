@@ -8,8 +8,8 @@ def forbidden(request):
 
 
 urlpatterns = [
+    path("", include("split.urls")),
     path("admin/", admin.site.urls),
-    path("split/", include("split.urls")),
     path("user/", include("users.urls")),
     path("forbidden/", forbidden),
 ]

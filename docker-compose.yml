@@ -27,13 +27,11 @@ services:
       - "${DJANGO_PORT}:${DJANGO_PORT}"
     volumes:
       - .:/app
-
     depends_on:
       postgres:
         condition: service_healthy
         restart: true
 
-  
   redis:
     image: "redis:alpine"
     container_name: redis-splitwisely

@@ -76,7 +76,6 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": "postgres",
-        # "HOST": "127.0.0.1",
         "PORT": os.getenv("POSTGRES_PORT", 5432),
     }
 }
@@ -122,5 +121,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
