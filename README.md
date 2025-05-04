@@ -194,7 +194,7 @@ Each bar represents a continuous phase of work — no idle gaps, just consistent
 * Timeline shown in MM/YY format
 * Color-coded for visual clarity
 
-📊 Gantt Chart
+### 📊 Gantt Chart
 
 ![Gantt Chart](./gantt.png)
 
