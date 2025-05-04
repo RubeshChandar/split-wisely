@@ -264,3 +264,18 @@ def create_grp(request):
 
     group.members.add(request.user)
     return redirect("single-group", slug=group.slug)
+
+
+@login_required
+def delete_grp(request, slug):
+    group = Group.objects.get(slug=slug)
+
+    if group.created_by != request.user:
+        messages.add_message(request, messages.WARNING,
+                             f"Group can't be deleted as you are not the admin for {group.name} group!!")
+        return redirect("single-group", slug=slug)
+
+    group.delete()
+    messages.add_message(request, messages.SUCCESS,
+                         f"{group.name} deleted successfully")
+    return redirect("home")

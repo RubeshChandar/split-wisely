@@ -12,22 +12,39 @@
 <div class="d-flex justify-content-between align-items-center fixed-top">
     <h1>Welcome, <span>{{username|title}}</span></h1>
 
-    <div>
-        <a style="margin-left:8px">
-            <button style="background-color:#ffc008;color:white"
+    <div class="d-none d-md-block">
+        <button class='button' style="background-color:#ffc008;"
             data-bs-target="#createGoupModal" data-bs-toggle="modal">
-                <i class="fa-solid fa-users-line me-2"></i>
-                Create Group
-            </button>
-        </a>
-        <a href="{% url "signout" %}" style="margin-left:8px">
-            <button style="background-color:red;color:white">
-                <i class="fa-solid fa-right-from-bracket me-2"></i>
-                Signout
-            </button>
+            <i class="fa-solid fa-users-line me-2"></i>
+            Create Group
+        </button>
+
+        <a href="{% url "signout" %}" style="background-color:red;" 
+        role="button" class="button">
+            <i class="fa-solid fa-right-from-bracket me-2"></i>
+            Signout
         </a>
     </div>
+
+    <div class="d-block d-md-none">
+    <div class="dropdown" data-bs-theme="dark" data-bs-toggle="dropdown" >
+        <button class="btn btn-secondary dropdown-toggle" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="dropdown-menu" style="overflow: hidden;">
+            <li><a class="dropdown-item" data-bs-target="#createGoupModal" data-bs-toggle="modal">            
+                <i class="fa-solid fa-users-line me-2"></i>
+                <span class="text-warning fw-bold">Create Group</span>
+            </a></li>
+            <li><a class="dropdown-item" href="{% url "signout" %}">
+                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                <span class="text-danger fw-bold">Signout</span>
+            </a></li>
+        </ul>
+    </div>
+    </div>
 </div>
+
 
 <div class="overall px-5 font-monospace">
     {% if amount < 0 %}
@@ -36,6 +53,20 @@
     <h4 class='mt-5'> Overall, you are owed <span>£{{amount}}</span> 💷</h4>
     {% endif %}
 </div>
+
+{% if messages %}
+<ul class="messages me-4">
+    {% for message in messages %}
+    <li class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {% if message.tags == "warning" %}
+        <i class="fa-solid fa-triangle-exclamation text-danger me-1"></i>
+        {% endif %}
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 <ul class="list-group">
     {% for GroupBalance in groupBalances %}

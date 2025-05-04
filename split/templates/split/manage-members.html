@@ -12,6 +12,9 @@
 {% include "split/include/group-header.html" %}
 
 <div class="container mt-3" data-bs-theme="dark">
+
+    <h1 class="text-primary">Add new Members :</h1>
+
     <div class="input-group">
         <span class="input-group-text" id="basic-addon1">@</span>
 
@@ -33,7 +36,7 @@
     {% endfor %}
     {% endif %}
 
-    <h1 class="text-warning">Current Members :</h1>
+    <h1 class="text-warning mt-2">Current Members :</h1>
     <ol class="list-group list-group-numbered">
         {% for member in group.members.all  %}
         <li class="list-group-item d-flex justify-content-between align-items-start">

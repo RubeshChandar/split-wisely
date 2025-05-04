@@ -24,9 +24,29 @@
                     <i class="fa-solid fa-users-gear text-warning"></i>Manage Members</a>
             </li>
             <li>
-                <a class="dropdown-item" href="#">
-                    <i class="fa-solid fa-trash-can text-danger"></i>  Delete group</a>
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+                    <i class="fa-solid fa-trash-can text-danger"></i>  Delete group
+                </a>
             </li>
         </ul>
     </div>
+</div>
+
+
+<div class="modal fade" id="confirmDelete" data-bs-backdrop="static" data-bs-theme="dark" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-light" >Are you sure?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light fs-3">
+        Do you want to delete <span class="text-danger">{{group.name}}</span> group?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Cancel</button>
+        <a type="button" href={% url "delete-group" slug=group.slug %} class="btn btn-danger">Yes, Delete</a>
+      </div>
+    </div>
+  </div>
 </div>

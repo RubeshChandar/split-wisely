@@ -23,10 +23,11 @@ h4>span {
     color: green;
 }
 
-button {
+.button {
     height: 100%;
     background-color: #ffffff;
-    color: #080710;
+    color: white;
+    margin-left: 8px;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: 600;
