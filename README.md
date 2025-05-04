@@ -196,7 +196,7 @@ Each bar represents a continuous phase of work — no idle gaps, just consistent
 
 ### 📊 Gantt Chart
 
-![Gantt Chart](./gantt.png)
+![Gantt Chart](./gantt_chart.png)
 
 ---
 
