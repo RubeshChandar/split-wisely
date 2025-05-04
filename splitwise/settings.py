@@ -10,6 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG", default=True)
+print("Debug ", os.getenv("DEBUG"))
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOST", "*").split(",")
 
@@ -21,7 +22,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_celery_results",
-    "debug_toolbar",
     "django_extensions",
     "widget_tweaks",
     "users",
@@ -35,7 +35,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -125,7 +124,3 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]

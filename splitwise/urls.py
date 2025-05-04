@@ -12,5 +12,4 @@ urlpatterns = [
     path("split/", include("split.urls")),
     path("user/", include("users.urls")),
     path("forbidden/", forbidden),
-    path("__debug__/", include("debug_toolbar.urls"))
 ]
