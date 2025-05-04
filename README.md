@@ -181,6 +181,24 @@ split-wisely/
 
 ![Model Graph](./models.svg)
 
+---
+
+## 🗓️ Project Timeline – Gantt Chart
+
+The following Gantt chart outlines the complete development journey of Splitwisely, from initial planning to deployment, and includes upcoming features like currency selection.
+
+Each bar represents a continuous phase of work — no idle gaps, just consistent progress 🚀
+
+📌 Legend
+• Tasks are aligned chronologically
+• Timeline shown in MM/YY format
+• Color-coded for visual clarity
+
+📊 Gantt Chart
+
+![Gantt Chart](./gantt.png)
+
+---
 
 ## 🔁 Group Balance Recalculation (Celery Task)
 
