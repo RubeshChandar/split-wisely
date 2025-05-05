@@ -2,6 +2,8 @@
 
 This project is a clone of the popular expense-splitting application, Splitwise. It's built using Django and HTMX, providing a dynamic and interactive user experience with minimal JavaScript.
 
+View web app @ https://splitwisely.rubeshchandar.com
+
 ## ✅ What’s Inside (Implemented Features)
 
 ### 🧾 Expense & Settlement Management
